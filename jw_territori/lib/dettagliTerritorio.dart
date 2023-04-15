@@ -1,13 +1,14 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 
-class Registro extends StatefulWidget {
-  const Registro({super.key});
+class DettagliTerritorio extends StatefulWidget {
+  const DettagliTerritorio({super.key});
 
   @override
-  State<Registro> createState() => _RegistroState();
+  State<DettagliTerritorio> createState() => _DettagliTerritorioState();
 }
 
-class _RegistroState extends State<Registro> {
+class _DettagliTerritorioState extends State<DettagliTerritorio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class _RegistroState extends State<Registro> {
         ],
       ),
       body: const Center(
-        child: Text('Registro'),
+        child: Text('Dettagli territorio'),
       ),
     );
   }

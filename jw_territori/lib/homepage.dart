@@ -30,7 +30,6 @@ class HomePage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    print('Normali');
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -68,7 +67,6 @@ class HomePage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    print('Commerciali');
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -106,7 +104,6 @@ class HomePage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    print('Registro');
                     Navigator.push(
                         context,
                         MaterialPageRoute(

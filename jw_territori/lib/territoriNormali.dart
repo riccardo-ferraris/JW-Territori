@@ -1,4 +1,6 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:jw_territori/widgets/territorioNorm.dart';
 
 class TerritoriNormali extends StatefulWidget {
   const TerritoriNormali({super.key});
@@ -10,20 +12,60 @@ class TerritoriNormali extends StatefulWidget {
 class _TerritoriNormaliState extends State<TerritoriNormali> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF5A2D81),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              // !TODO: Creare l'interruzione di sessione
-            },
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF5A2D81),
+          bottom: const TabBar(
+            labelColor: Colors.white,
+            indicatorColor: Colors.white,
+            labelStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            indicatorWeight: 3,
+            tabs: [
+              Tab(
+                text: 'Tutti',
+              ),
+              Tab(
+                text: 'Disponibili',
+              ),
+              Tab(
+                text: 'Non disponibili',
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Center(
-        child: Text('Territori normali'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                // !TODO: Creare l'interruzione di sessione
+              },
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: TabBarView(children: [
+                ListView.builder(
+                    itemCount: 72,
+                    itemBuilder: (context, index) {
+                      return TerritorioNorm(index: ++index);
+                    }),
+                ListView.builder(
+                    itemCount: 72,
+                    itemBuilder: (context, index) {
+                      return TerritorioNorm(index: ++index);
+                    }),
+                ListView.builder(
+                    itemCount: 72,
+                    itemBuilder: (context, index) {
+                      return TerritorioNorm(index: ++index);
+                    }),
+              ]),
+            )
+          ],
+        ),
       ),
     );
   }
