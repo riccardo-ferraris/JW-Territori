@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "672341818129",
+    "firebase_url": "https://territory-application-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "territory-application",
+    "storage_bucket": "territory-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672341818129:android:cd1f4a49edeb036bcceab0",
+        "android_client_info": {
+          "package_name": "com.example.jw_territori"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672341818129-u5ibbi4kfj7kf4mcvbdu2s2ogc7h5k0o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnGw2DHnFYC7jKSmCI_LuExQSPGKlxQng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672341818129-l1n37ufg4hshuharul7163n1c7n0ipd3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "672341818129-742phhj285m9bpdcc1o722k5cokqhg7p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.territoryApplication"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

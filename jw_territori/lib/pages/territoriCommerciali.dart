@@ -48,17 +48,17 @@ class _TerritoriCommercialiState extends State<TerritoriCommerciali> {
             Expanded(
               child: TabBarView(children: [
                 ListView.builder(
-                    itemCount: 10,
+                    itemCount: 11,
                     itemBuilder: (context, index) {
                       return TerritorioComm(index: index + 65);
                     }),
                 ListView.builder(
-                    itemCount: 10,
+                    itemCount: 11,
                     itemBuilder: (context, index) {
                       return TerritorioComm(index: index + 65);
                     }),
                 ListView.builder(
-                    itemCount: 10,
+                    itemCount: 11,
                     itemBuilder: (context, index) {
                       return TerritorioComm(index: index + 65);
                     }),

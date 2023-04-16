@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>672341818129-8v0076tfl1qdg0nf4so4mc9q45qc0bie.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.672341818129-8v0076tfl1qdg0nf4so4mc9q45qc0bie</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDLuoPIqiVgb0-_qGw9pW1iXRxyyhtMkQc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>672341818129</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.jwTerritori</string>
+	<key>PROJECT_ID</key>
+	<string>territory-application</string>
+	<key>STORAGE_BUCKET</key>
+	<string>territory-application.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:672341818129:ios:c381e495097818eacceab0</string>
+	<key>DATABASE_URL</key>
+	<string>https://territory-application-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>

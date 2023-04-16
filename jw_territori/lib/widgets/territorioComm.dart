@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jw_territori/dettagliTerritorio.dart';
+
+import '../pages/dettagliTerritorio.dart';
 
 class TerritorioComm extends StatefulWidget {
   TerritorioComm({super.key, required this.index});

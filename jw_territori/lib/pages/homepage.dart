@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jw_territori/registro.dart';
-import 'package:jw_territori/territoriCommerciali.dart';
-import 'package:jw_territori/territoriNormali.dart';
+import 'package:jw_territori/pages/registro.dart';
+import 'package:jw_territori/pages/territoriCommerciali.dart';
+import 'package:jw_territori/pages/territoriNormali.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
