@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.only(top: 150.0),
                     child: Image.asset(
                       'images/logo jw territori.jpg',
-                      width: 200,
                     ),
                   ),
                   Container(
@@ -73,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Color(0xFF64398B),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 70.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
