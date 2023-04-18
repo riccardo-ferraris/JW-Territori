@@ -62,7 +62,8 @@ class _TerritorioNormState extends State<TerritorioNorm> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const DettagliTerritorio()));
+                        builder: (context) =>
+                            DettagliTerritorio(index: widget.index)));
               },
             ),
           ],

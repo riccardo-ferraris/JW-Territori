@@ -58,7 +58,8 @@ class _TerritorioCommState extends State<TerritorioComm> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const DettagliTerritorio()));
+                        builder: (context) =>
+                            DettagliTerritorio(index: widget.index)));
               },
             ),
           ],

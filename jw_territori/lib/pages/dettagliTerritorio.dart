@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DettagliTerritorio extends StatefulWidget {
-  const DettagliTerritorio({super.key});
+  DettagliTerritorio({super.key, required this.index});
+
+  int index;
 
   @override
   State<DettagliTerritorio> createState() => _DettagliTerritorioState();
@@ -41,7 +43,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                   child: Column(
                     children: [
                       Image.asset(
-                        'images/territorio 22.jpg',
+                        'images/territorio ${widget.index}.jpg',
                         fit: BoxFit.fill,
                       ),
                       const SizedBox(
