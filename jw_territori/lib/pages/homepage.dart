@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jw_territori/pages/registro.dart';
 import 'package:jw_territori/pages/territoriCommerciali.dart';
 import 'package:jw_territori/pages/territoriNormali.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +15,12 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF5A2D81),
         automaticallyImplyLeading: false,
+        title: Text('Ciao ${user?.email}'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              // !TODO: Creare l'interruzione di sessione
+              FirebaseAuth.instance.signOut();
             },
           ),
         ],

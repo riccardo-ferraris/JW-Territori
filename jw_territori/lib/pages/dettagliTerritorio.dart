@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DettagliTerritorio extends StatefulWidget {
@@ -20,7 +21,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              // !TODO: Creare l'interruzione di sessione
+              FirebaseAuth.instance.signOut();
             },
           ),
         ],
@@ -34,8 +35,8 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                 Card(
                   elevation: 8,
                   clipBehavior: Clip.hardEdge,
-                  color: Color.fromARGB(255, 226, 226, 226),
-                  shape: RoundedRectangleBorder(
+                  color: const Color.fromARGB(255, 226, 226, 226),
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Column(
                     children: [
@@ -43,28 +44,28 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                         'images/territorio 22.jpg',
                         fit: BoxFit.fill,
                       ),
-                      SizedBox(
-                        height: 30,
+                      const SizedBox(
+                        height: 10,
                       ),
                       isAssigned
                           ? Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Fratello in possesso',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 30,
                                   ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: [
+                                    children: const [
                                       Text(
                                         'Data di uscita',
                                         style: TextStyle(
@@ -90,7 +91,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Data di rientro',
                                     style: TextStyle(
                                       fontSize: 20,
@@ -98,7 +99,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                     ),
                                   ),
                                   if (isAssigned)
-                                    Text(
+                                    const Text(
                                       'Data limite',
                                       style: TextStyle(
                                         fontSize: 20,
@@ -111,7 +112,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 isAssigned
@@ -120,15 +121,15 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.red),
                           elevation: MaterialStateProperty.all(5),
-                          padding:
-                              MaterialStateProperty.all(EdgeInsets.all(20)),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(20)),
                         ),
                         onPressed: () {
                           setState(() {
                             isAssigned = !isAssigned;
                           });
                         },
-                        child: Text(
+                        child: const Text(
                           'Riconsegna',
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
@@ -137,10 +138,16 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                         children: [
                           TextFormField(
                             decoration: InputDecoration(
-                              fillColor: Color.fromARGB(255, 255, 255, 255),
+                              fillColor:
+                                  const Color.fromARGB(255, 255, 255, 255),
                               filled: true,
+                              hintText:
+                                  "Fratello a cui assegnare il territorio",
+                              hintStyle: const TextStyle(
+                                color: Color.fromARGB(255, 95, 95, 95),
+                              ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: Color(0xFF5A2D81), width: 2),
                                 borderRadius: BorderRadius.circular(20),
                               ),
@@ -151,7 +158,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                           TextButton(
@@ -159,15 +166,15 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green),
                               elevation: MaterialStateProperty.all(5),
-                              padding:
-                                  MaterialStateProperty.all(EdgeInsets.all(20)),
+                              padding: MaterialStateProperty.all(
+                                  const EdgeInsets.all(20)),
                             ),
                             onPressed: () {
                               setState(() {
                                 isAssigned = !isAssigned;
                               });
                             },
-                            child: Text(
+                            child: const Text(
                               'Affida',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),

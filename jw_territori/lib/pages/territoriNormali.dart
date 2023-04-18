@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jw_territori/widgets/territorioNorm.dart';
 
@@ -38,7 +39,7 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {
-                // !TODO: Creare l'interruzione di sessione
+                FirebaseAuth.instance.signOut();
               },
             ),
           ],

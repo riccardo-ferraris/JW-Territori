@@ -38,16 +38,20 @@ class _TerritorioNormState extends State<TerritorioNorm> {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Informazioni'),
-                    SizedBox(
-                      height: 6,
+                  children: [
+                    const Text('Fratello in possesso'),
+                    const SizedBox(
+                      height: 15,
                     ),
-                    Text('Fratello in possesso'),
-                    SizedBox(
-                      height: 6,
+                    Row(
+                      children: const [
+                        Text('Data uscita'),
+                        SizedBox(
+                          width: 80,
+                        ),
+                        Text('Data limite'),
+                      ],
                     ),
-                    Text('xx/yy/zzzz'),
                   ],
                 ),
               ],
