@@ -42,8 +42,9 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                       borderRadius: BorderRadius.all(Radius.circular(15))),
                   child: Column(
                     children: [
+                      //!TODO aggiungere controllo per territori commerciali e implementare le immagini adatte
                       Image.asset(
-                        'images/territorio ${widget.index}.jpg',
+                        'images/territori/territorio ${widget.index}.jpg',
                         fit: BoxFit.fill,
                       ),
                       const SizedBox(
@@ -127,9 +128,38 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                               const EdgeInsets.all(20)),
                         ),
                         onPressed: () {
-                          setState(() {
-                            isAssigned = !isAssigned;
-                          });
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Sei sicuro?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('No',
+                                          style: TextStyle(
+                                              color: Color(0xFF5A2D81),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20)),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isAssigned = !isAssigned;
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Si',
+                                          style: TextStyle(
+                                              color: Color(0xFF5A2D81),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20)),
+                                    ),
+                                  ],
+                                );
+                              });
                         },
                         child: const Text(
                           'Riconsegna',
@@ -172,9 +202,28 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                   const EdgeInsets.all(20)),
                             ),
                             onPressed: () {
-                              setState(() {
-                                isAssigned = !isAssigned;
-                              });
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text('Sei sicuro?'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('No')),
+                                        TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                isAssigned = !isAssigned;
+                                              });
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Si')),
+                                      ],
+                                    );
+                                  });
                             },
                             child: const Text(
                               'Affida',
