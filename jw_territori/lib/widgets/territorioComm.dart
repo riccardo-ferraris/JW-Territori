@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioNormaleModel.dart';
 
+import '../models/territorioCommercialeModel.dart';
 import '../pages/dettagliTerritorio.dart';
 
 class TerritorioComm extends StatefulWidget {
-  TerritorioComm({super.key, required this.index});
+  TerritorioComm({super.key, required this.territorioCommerciale});
 
-  int index;
+  TerritorioCommercialeModel territorioCommerciale;
 
   @override
   State<TerritorioComm> createState() => _TerritorioCommState();
@@ -27,7 +29,7 @@ class _TerritorioCommState extends State<TerritorioComm> {
             Row(
               children: [
                 Text(
-                  String.fromCharCode(widget.index),
+                  '${widget.territorioCommerciale.lettera}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -58,13 +60,14 @@ class _TerritorioCommState extends State<TerritorioComm> {
             ),
             GestureDetector(
               child: const Icon(Icons.arrow_forward_ios),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DettagliTerritorio(index: widget.index)));
-              },
+              // onTap: () {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => DettagliTerritorio(
+              //                 territorioNormale: widget.territorioNormale,
+              //               )));
+              // },
             ),
           ],
         ),

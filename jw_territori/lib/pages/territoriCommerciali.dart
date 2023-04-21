@@ -1,6 +1,8 @@
 // ignore: file_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioCommercialeModel.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 import 'package:jw_territori/widgets/territorioComm.dart';
 
 class TerritoriCommerciali extends StatefulWidget {
@@ -45,26 +47,63 @@ class _TerritoriCommercialiState extends State<TerritoriCommerciali> {
           ],
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: TabBarView(children: [
-                ListView.builder(
-                    itemCount: 11,
-                    itemBuilder: (context, index) {
-                      return TerritorioComm(index: index + 65);
-                    }),
-                ListView.builder(
-                    itemCount: 11,
-                    itemBuilder: (context, index) {
-                      return TerritorioComm(index: index + 65);
-                    }),
-                ListView.builder(
-                    itemCount: 11,
-                    itemBuilder: (context, index) {
-                      return TerritorioComm(index: index + 65);
-                    }),
-              ]),
-            )
+            StreamBuilder<List<TerritorioCommercialeModel>>(
+                stream: FirestoreHelper.readComm(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Some error occurred!'),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    final territoriCommercialiData = snapshot.data;
+
+                    return Expanded(
+                      child: TabBarView(children: [
+                        ListView.builder(
+                            itemCount: territoriCommercialiData!.length,
+                            itemBuilder: (context, index) {
+                              final singleTerritorioCommerciale =
+                                  territoriCommercialiData[index];
+                              return TerritorioComm(
+                                territorioCommerciale:
+                                    singleTerritorioCommerciale,
+                              );
+                            }),
+                        ListView.builder(
+                            itemCount: territoriCommercialiData.length,
+                            itemBuilder: (context, index) {
+                              final singleTerritorioCommerciale =
+                                  territoriCommercialiData[index];
+                              return TerritorioComm(
+                                territorioCommerciale:
+                                    singleTerritorioCommerciale,
+                              );
+                            }),
+                        ListView.builder(
+                            itemCount: territoriCommercialiData.length,
+                            itemBuilder: (context, index) {
+                              final singleTerritorioCommerciale =
+                                  territoriCommercialiData[index];
+                              return TerritorioComm(
+                                territorioCommerciale:
+                                    singleTerritorioCommerciale,
+                              );
+                            }),
+                      ]),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                })
           ],
         ),
       ),

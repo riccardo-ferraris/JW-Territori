@@ -1,6 +1,8 @@
 // ignore: file_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioNormaleModel.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 import 'package:jw_territori/widgets/territorioNorm.dart';
 
 class TerritoriNormali extends StatefulWidget {
@@ -45,26 +47,60 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
           ],
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: TabBarView(children: [
-                ListView.builder(
-                    itemCount: 72,
-                    itemBuilder: (context, index) {
-                      return TerritorioNorm(index: ++index);
-                    }),
-                ListView.builder(
-                    itemCount: 72,
-                    itemBuilder: (context, index) {
-                      return TerritorioNorm(index: ++index);
-                    }),
-                ListView.builder(
-                    itemCount: 72,
-                    itemBuilder: (context, index) {
-                      return TerritorioNorm(index: ++index);
-                    }),
-              ]),
-            )
+            StreamBuilder<List<TerritorioNormaleModel>>(
+                stream: FirestoreHelper.read(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Some error occurred!'),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    final territoriNormaliData = snapshot.data;
+
+                    return Expanded(
+                      child: TabBarView(children: [
+                        ListView.builder(
+                            itemCount: territoriNormaliData!.length,
+                            itemBuilder: (context, index) {
+                              final singleTerritorioNormale =
+                                  territoriNormaliData[index];
+                              return TerritorioNorm(
+                                territorioNormale: singleTerritorioNormale,
+                              );
+                            }),
+                        ListView.builder(
+                            itemCount: territoriNormaliData!.length,
+                            itemBuilder: (context, index) {
+                              final singleTerritorioNormale =
+                                  territoriNormaliData[index];
+                              return TerritorioNorm(
+                                territorioNormale: singleTerritorioNormale,
+                              );
+                            }),
+                        ListView.builder(
+                            itemCount: territoriNormaliData!.length,
+                            itemBuilder: (context, index) {
+                              final singleTerritorioNormale =
+                                  territoriNormaliData[index];
+                              return TerritorioNorm(
+                                territorioNormale: singleTerritorioNormale,
+                              );
+                            }),
+                      ]),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                })
           ],
         ),
       ),

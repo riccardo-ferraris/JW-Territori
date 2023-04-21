@@ -1,11 +1,12 @@
 // ignore: file_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioNormaleModel.dart';
 
 class DettagliTerritorio extends StatefulWidget {
-  DettagliTerritorio({super.key, required this.index});
+  DettagliTerritorio({super.key, required this.territorioNormale});
 
-  int index;
+  TerritorioNormaleModel territorioNormale;
 
   @override
   State<DettagliTerritorio> createState() => _DettagliTerritorioState();
@@ -39,12 +40,13 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                   clipBehavior: Clip.hardEdge,
                   color: const Color.fromARGB(255, 226, 226, 226),
                   shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      side: BorderSide(color: Colors.black)),
                   child: Column(
                     children: [
                       //!TODO aggiungere controllo per territori commerciali e implementare le immagini adatte
                       Image.asset(
-                        'images/territori/territorio ${widget.index}.jpg',
+                        'images/territori/territorio ${widget.territorioNormale.numero}.jpg',
                         fit: BoxFit.fill,
                       ),
                       const SizedBox(
@@ -55,9 +57,9 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
                                 children: [
-                                  const Text(
-                                    'Fratello in possesso',
-                                    style: TextStyle(
+                                  Text(
+                                    '${widget.territorioNormale.fratelloInPossesso}',
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -68,17 +70,17 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: const [
+                                    children: [
                                       Text(
-                                        'Data di uscita',
-                                        style: TextStyle(
+                                        '${widget.territorioNormale.dataUscita}',
+                                        style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       Text(
-                                        'Data limite',
-                                        style: TextStyle(
+                                        '${widget.territorioNormale.dataLimite}',
+                                        style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -94,17 +96,17 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    'Data di rientro',
-                                    style: TextStyle(
+                                  Text(
+                                    '${widget.territorioNormale.dataRientro}',
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   if (isAssigned)
-                                    const Text(
-                                      'Data limite',
-                                      style: TextStyle(
+                                    Text(
+                                      '${widget.territorioNormale.dataLimite}',
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -149,6 +151,11 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                         setState(() {
                                           isAssigned = !isAssigned;
                                         });
+                                        // ! Creata data attuale, implementare update del database
+                                        // DateTime now = new DateTime.now();
+                                        // String dataString =
+                                        //     '${now.day}/${now.month}/${now.year}';
+                                        // ! ----------------------------------------------------
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Si',
