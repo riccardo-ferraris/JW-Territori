@@ -6,8 +6,8 @@ import '../models/territorioCommercialeModel.dart';
 final territoriCollection =
     FirebaseFirestore.instance.collection('"Territori"');
 
-// ! TUTTI
 class FirestoreHelper {
+// ! READ DI TUTTI
   static Stream<List<TerritorioNormaleModel>> readAllNormali() {
     final queryTuttiNormali = territoriCollection
         .where('isNormale', isEqualTo: true)
@@ -83,21 +83,21 @@ class FirestoreHelper {
         .toList());
   }
 
-  // static Future updateRiconsegnaNormali(
-  //     TerritorioNormaleModel territorioNormale, String dataRientro) async {
-  //   final docRef = territoriCollection.doc();
-  //   final newTerritorioNormale = TerritorioNormaleModel(
-  //           fratelloInPossesso: 'Fratello in possesso',
-  //           dataLimite: 'Data Limite',
-  //           dataUscita: 'Data Uscita',
-  //           isDisponibile: true,
-  //           dataRientro: dataRientro)
-  //       .toJson();
+  static Future updateRiconsegnaNormali(
+      TerritorioNormaleModel territorioNormale, String dataRientro) async {
+    final docRef = territoriCollection.doc(territoriCollection.id);
+    final newTerritorioNormale = TerritorioNormaleModel(
+            fratelloInPossesso: 'Fratello in possesso',
+            dataLimite: 'Data Limite',
+            dataUscita: 'Data Uscita',
+            isDisponibile: true,
+            dataRientro: dataRientro)
+        .toJson();
 
-  //   try {
-  //     await docRef.set(newTerritorioNormale);
-  //   } catch (e) {
-  //     print('Some error occurred $e');
-  //   }
-  // }
+    try {
+      await docRef.set(newTerritorioNormale);
+    } catch (e) {
+      print('Some error occurred $e');
+    }
+  }
 }

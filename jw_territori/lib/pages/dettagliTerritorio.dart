@@ -160,6 +160,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                         // FirestoreHelper.updateRiconsegnaNormali(
                                         //     widget.territorioNormale,
                                         //     dataString);
+
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Si',
