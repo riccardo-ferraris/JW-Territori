@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jw_territori/models/territorioNormaleModel.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 
 class DettagliTerritorio extends StatefulWidget {
   DettagliTerritorio({super.key, required this.territorioNormale});
@@ -152,10 +153,13 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                           isAssigned = !isAssigned;
                                         });
                                         // ! Creata data attuale, implementare update del database
-                                        // DateTime now = new DateTime.now();
-                                        // String dataString =
-                                        //     '${now.day}/${now.month}/${now.year}';
+                                        DateTime now = DateTime.now();
+                                        String dataString =
+                                            '${now.day}/${now.month}/${now.year}';
                                         // ! ----------------------------------------------------
+                                        // FirestoreHelper.updateRiconsegnaNormali(
+                                        //     widget.territorioNormale,
+                                        //     dataString);
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Si',

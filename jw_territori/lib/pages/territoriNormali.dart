@@ -50,7 +50,7 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StreamBuilder<List<TerritorioNormaleModel>>(
-                stream: FirestoreHelper.read(),
+                stream: FirestoreHelper.readAllNormali(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -77,7 +77,7 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
                               );
                             }),
                         ListView.builder(
-                            itemCount: territoriNormaliData!.length,
+                            itemCount: territoriNormaliData.length,
                             itemBuilder: (context, index) {
                               final singleTerritorioNormale =
                                   territoriNormaliData[index];
@@ -86,7 +86,7 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
                               );
                             }),
                         ListView.builder(
-                            itemCount: territoriNormaliData!.length,
+                            itemCount: territoriNormaliData.length,
                             itemBuilder: (context, index) {
                               final singleTerritorioNormale =
                                   territoriNormaliData[index];

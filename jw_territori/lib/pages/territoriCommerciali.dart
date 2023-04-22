@@ -50,7 +50,7 @@ class _TerritoriCommercialiState extends State<TerritoriCommerciali> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StreamBuilder<List<TerritorioCommercialeModel>>(
-                stream: FirestoreHelper.readComm(),
+                stream: FirestoreHelper.readCommercialiDisponibili(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
