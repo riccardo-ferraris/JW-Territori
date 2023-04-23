@@ -16,6 +16,8 @@ class DettagliTerritorio extends StatefulWidget {
 class _DettagliTerritorioState extends State<DettagliTerritorio> {
   bool isAssigned = true;
 
+  final controllerFratello = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +55,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                       const SizedBox(
                         height: 10,
                       ),
-                      isAssigned
+                      isAssigned //? --------------------------------------------------------------------------------
                           ? Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
@@ -104,7 +106,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  if (isAssigned)
+                                  if (isAssigned) //? --------------------------------------------------------------------------------
                                     Text(
                                       '${widget.territorioNormale.dataLimite}',
                                       style: const TextStyle(
@@ -121,7 +123,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                 const SizedBox(
                   height: 30,
                 ),
-                isAssigned
+                isAssigned //? --------------------------------------------------------------------------------
                     ? TextButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -150,17 +152,19 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                     TextButton(
                                       onPressed: () {
                                         setState(() {
-                                          isAssigned = !isAssigned;
-                                        });
-                                        // ! Creata data attuale, implementare update del database
-                                        DateTime now = DateTime.now();
-                                        String dataString =
-                                            '${now.day}/${now.month}/${now.year}';
-                                        // ! ----------------------------------------------------
-                                        // FirestoreHelper.updateRiconsegnaNormali(
-                                        //     widget.territorioNormale,
-                                        //     dataString);
+                                          isAssigned =
+                                              !isAssigned; //? -----------------------------------------------------------------
 
+                                          DateTime now = DateTime.now();
+                                          String dataString =
+                                              '${now.day}/${now.month}/${now.year}';
+
+                                          FirestoreHelper
+                                              .updateRiconsegnaNormali(
+                                                  dataString,
+                                                  widget.territorioNormale
+                                                      .numero);
+                                        });
                                         Navigator.pop(context);
                                       },
                                       child: const Text('Si',
@@ -181,6 +185,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                     : Column(
                         children: [
                           TextFormField(
+                            controller: controllerFratello,
                             decoration: InputDecoration(
                               fillColor:
                                   const Color.fromARGB(255, 255, 255, 255),
@@ -228,7 +233,20 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                         TextButton(
                                             onPressed: () {
                                               setState(() {
-                                                isAssigned = !isAssigned;
+                                                isAssigned =
+                                                    !isAssigned; //? --------------------------------------------------------------
+
+                                                DateTime now = DateTime.now();
+                                                String dataString =
+                                                    '${now.day}/${now.month}/${now.year}';
+
+                                                FirestoreHelper
+                                                    .updateAffidaNormali(
+                                                        dataString,
+                                                        widget.territorioNormale
+                                                            .numero,
+                                                        controllerFratello
+                                                            .text);
                                               });
                                               Navigator.pop(context);
                                             },

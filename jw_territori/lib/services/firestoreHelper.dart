@@ -83,15 +83,44 @@ class FirestoreHelper {
         .toList());
   }
 
-  static Future updateRiconsegnaNormali(
-      TerritorioNormaleModel territorioNormale, String dataRientro) async {
-    final docRef = territoriCollection.doc(territoriCollection.id);
+  static Future updateRiconsegnaNormali(String dataAttuale, int? numero) async {
+    final docRef = territoriCollection.doc(numero.toString());
     final newTerritorioNormale = TerritorioNormaleModel(
             fratelloInPossesso: 'Fratello in possesso',
             dataLimite: 'Data Limite',
             dataUscita: 'Data Uscita',
             isDisponibile: true,
-            dataRientro: dataRientro)
+            dataRientro: dataAttuale,
+            isNormale: true,
+            numero: numero)
+        .toJson();
+
+    try {
+      await docRef.set(newTerritorioNormale);
+    } catch (e) {
+      print('Some error occurred $e');
+    }
+  }
+
+  static Future updateAffidaNormali(
+      String dataAttuale, int? numero, String fratello) async {
+    final String dataRientroFormat;
+    DateTime now = DateTime.now();
+    if (now.month + 4 > 12) {
+      dataRientroFormat = '${now.day}/${now.month - 8}/${now.year + 1}';
+    } else {
+      dataRientroFormat = '${now.day}/${now.month + 4}/${now.year}';
+    }
+    ;
+    final docRef = territoriCollection.doc(numero.toString());
+    final newTerritorioNormale = TerritorioNormaleModel(
+            fratelloInPossesso: fratello,
+            dataLimite: dataRientroFormat,
+            dataUscita: dataAttuale,
+            isDisponibile: false,
+            dataRientro: 'Data Rientro',
+            isNormale: true,
+            numero: numero)
         .toJson();
 
     try {
