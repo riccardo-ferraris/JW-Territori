@@ -38,7 +38,7 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
             ],
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
+            // ? IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {

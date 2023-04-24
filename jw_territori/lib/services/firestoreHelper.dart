@@ -10,7 +10,7 @@ final territoriCollection =
     FirebaseFirestore.instance.collection('"Territori"');
 
 class FirestoreHelper {
-  //Crea Toast
+  //! CREATE TOAST
   static createToast(String textMessage) {
     Fluttertoast.showToast(
         msg: textMessage,
@@ -21,7 +21,7 @@ class FirestoreHelper {
         fontSize: 16.0);
   }
 
-  //Set name
+  //! SET NAME
   static setName(FirebaseAuth currentUser) {
     if (FirebaseAuth.instance.currentUser!.email!.contains('scotti')) {
       return 'Vincenzo Scotti';
@@ -62,7 +62,6 @@ class FirestoreHelper {
   }
 
   // ! DISPONIBILI
-  // ! ORDINARE PER DATA RIENTRO
   static Stream<List<TerritorioNormaleModel>> readNormaliDisponibili() {
     final queryDisponibili = territoriCollection
         .where('isDisponibile', isEqualTo: true)
@@ -75,7 +74,6 @@ class FirestoreHelper {
         .toList());
   }
 
-  // ! ORDINARE PER DATA RIENTRO
   static Stream<List<TerritorioCommercialeModel>> readCommercialiDisponibili() {
     final queryDisponibili = territoriCollection
         .where('isDisponibile', isEqualTo: true)
@@ -89,7 +87,6 @@ class FirestoreHelper {
   }
 
   // ! NON DISPONIBILI
-  // ! ORDINARE PER DATA RIENTRO
   static Stream<List<TerritorioNormaleModel>> readNormaliNonDisponibili() {
     final queryDisponibili = territoriCollection
         .where('isDisponibile', isEqualTo: false)
@@ -102,7 +99,6 @@ class FirestoreHelper {
         .toList());
   }
 
-  // ! ORDINARE PER DATA RIENTRO
   static Stream<List<TerritorioCommercialeModel>>
       readCommercialiNonDisponibili() {
     final queryDisponibili = territoriCollection
