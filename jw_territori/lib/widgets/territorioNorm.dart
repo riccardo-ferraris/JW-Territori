@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jw_territori/models/territorioNormaleModel.dart';
 
-import '../pages/dettagliTerritorio.dart';
+import '../pages/dettagliTerritorioNormale.dart';
 
 class TerritorioNorm extends StatefulWidget {
   TerritorioNorm({super.key, required this.territorioNormale});
@@ -50,8 +50,9 @@ class _TerritorioNormState extends State<TerritorioNorm> {
                     ),
                     Row(
                       children: [
-                        Text('${widget.territorioNormale.dataUscita}',
-                            style: const TextStyle()),
+                        Text(
+                          '${widget.territorioNormale.dataUscita}',
+                        ),
                         const SizedBox(
                           width: 80,
                         ),
@@ -68,7 +69,7 @@ class _TerritorioNormState extends State<TerritorioNorm> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DettagliTerritorio(
+                        builder: (context) => DettagliTerritorioNormale(
                               territorioNormale: widget.territorioNormale,
                             )));
               },

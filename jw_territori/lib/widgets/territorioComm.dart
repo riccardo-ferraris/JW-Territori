@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jw_territori/models/territorioNormaleModel.dart';
 
 import '../models/territorioCommercialeModel.dart';
-import '../pages/dettagliTerritorio.dart';
+import '../pages/dettagliTerritorioCommerciale.dart';
 
 class TerritorioComm extends StatefulWidget {
   TerritorioComm({super.key, required this.territorioCommerciale});
@@ -41,17 +40,23 @@ class _TerritorioCommState extends State<TerritorioComm> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Fratello in possesso'),
+                    Text(
+                      '${widget.territorioCommerciale.fratelloInPossesso}',
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
                     Row(
-                      children: const [
-                        Text('Data uscita'),
-                        SizedBox(
+                      children: [
+                        Text(
+                          '${widget.territorioCommerciale.dataUscita}',
+                        ),
+                        const SizedBox(
                           width: 80,
                         ),
-                        Text('Data limite'),
+                        Text('${widget.territorioCommerciale.dataLimite}'),
                       ],
                     ),
                   ],
@@ -60,14 +65,15 @@ class _TerritorioCommState extends State<TerritorioComm> {
             ),
             GestureDetector(
               child: const Icon(Icons.arrow_forward_ios),
-              // onTap: () {
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) => DettagliTerritorio(
-              //                 territorioNormale: widget.territorioNormale,
-              //               )));
-              // },
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DettagliTerritorioCommerciale(
+                              territorioCommerciale:
+                                  widget.territorioCommerciale,
+                            )));
+              },
             ),
           ],
         ),

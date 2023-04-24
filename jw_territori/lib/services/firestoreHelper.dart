@@ -83,6 +83,7 @@ class FirestoreHelper {
         .toList());
   }
 
+//! UPDATE TERRITORI NORMALI
   static Future updateRiconsegnaNormali(String dataAttuale, int? numero) async {
     final docRef = territoriCollection.doc(numero.toString());
     final newTerritorioNormale = TerritorioNormaleModel(
@@ -96,7 +97,7 @@ class FirestoreHelper {
         .toJson();
 
     try {
-      await docRef.set(newTerritorioNormale);
+      await docRef.update(newTerritorioNormale);
     } catch (e) {
       print('Some error occurred $e');
     }
@@ -111,7 +112,7 @@ class FirestoreHelper {
     } else {
       dataRientroFormat = '${now.day}/${now.month + 4}/${now.year}';
     }
-    ;
+
     final docRef = territoriCollection.doc(numero.toString());
     final newTerritorioNormale = TerritorioNormaleModel(
             fratelloInPossesso: fratello,
@@ -124,7 +125,56 @@ class FirestoreHelper {
         .toJson();
 
     try {
-      await docRef.set(newTerritorioNormale);
+      await docRef.update(newTerritorioNormale);
+    } catch (e) {
+      print('Some error occurred $e');
+    }
+  }
+
+  //! UPDATE TERRITORI COMMERCIALI
+  static Future updateRiconsegnaCommerciali(
+      String dataAttuale, String? lettera) async {
+    final docRef = territoriCollection.doc(lettera);
+    final newTerritorioCommerciale = TerritorioCommercialeModel(
+            fratelloInPossesso: 'Fratello in possesso',
+            dataLimite: 'Data Limite',
+            dataUscita: 'Data Uscita',
+            isDisponibile: true,
+            dataRientro: dataAttuale,
+            isNormale: false,
+            lettera: lettera)
+        .toJson();
+
+    try {
+      await docRef.update(newTerritorioCommerciale);
+    } catch (e) {
+      print('Some error occurred $e');
+    }
+  }
+
+  static Future updateAffidaCommerciali(
+      String dataAttuale, String? lettera, String fratello) async {
+    final String dataRientroFormat;
+    DateTime now = DateTime.now();
+    if (now.month + 4 > 12) {
+      dataRientroFormat = '${now.day}/${now.month - 8}/${now.year + 1}';
+    } else {
+      dataRientroFormat = '${now.day}/${now.month + 4}/${now.year}';
+    }
+
+    final docRef = territoriCollection.doc(lettera);
+    final newTerritorioCommerciale = TerritorioCommercialeModel(
+            fratelloInPossesso: fratello,
+            dataLimite: dataRientroFormat,
+            dataUscita: dataAttuale,
+            isDisponibile: false,
+            dataRientro: 'Data Rientro',
+            isNormale: false,
+            lettera: lettera)
+        .toJson();
+
+    try {
+      await docRef.update(newTerritorioCommerciale);
     } catch (e) {
       print('Some error occurred $e');
     }
