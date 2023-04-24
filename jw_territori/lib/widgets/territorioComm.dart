@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../pages/dettagliTerritorio.dart';
+import '../models/territorioCommercialeModel.dart';
+import '../pages/dettagliTerritorioCommerciale.dart';
 
 class TerritorioComm extends StatefulWidget {
-  TerritorioComm({super.key, required this.index});
+  TerritorioComm({super.key, required this.territorioCommerciale});
 
-  int index;
+  TerritorioCommercialeModel territorioCommerciale;
 
   @override
   State<TerritorioComm> createState() => _TerritorioCommState();
@@ -27,7 +28,7 @@ class _TerritorioCommState extends State<TerritorioComm> {
             Row(
               children: [
                 Text(
-                  String.fromCharCode(widget.index),
+                  '${widget.territorioCommerciale.lettera}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -39,17 +40,23 @@ class _TerritorioCommState extends State<TerritorioComm> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Fratello in possesso'),
+                    Text(
+                      '${widget.territorioCommerciale.fratelloInPossesso}',
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
                     Row(
-                      children: const [
-                        Text('Data uscita'),
-                        SizedBox(
+                      children: [
+                        Text(
+                          '${widget.territorioCommerciale.dataUscita}',
+                        ),
+                        const SizedBox(
                           width: 80,
                         ),
-                        Text('Data limite'),
+                        Text('${widget.territorioCommerciale.dataLimite}'),
                       ],
                     ),
                   ],
@@ -62,8 +69,10 @@ class _TerritorioCommState extends State<TerritorioComm> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            DettagliTerritorio(index: widget.index)));
+                        builder: (context) => DettagliTerritorioCommerciale(
+                              territorioCommerciale:
+                                  widget.territorioCommerciale,
+                            )));
               },
             ),
           ],

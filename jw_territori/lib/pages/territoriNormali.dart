@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 import 'package:jw_territori/widgets/territorioNorm.dart';
 
 class TerritoriNormali extends StatefulWidget {
@@ -17,6 +18,7 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          title: const Text('Residenziali'),
           backgroundColor: const Color(0xFF5A2D81),
           bottom: const TabBar(
             labelColor: Colors.white,
@@ -36,6 +38,7 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
             ],
           ),
           actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {
@@ -44,29 +47,101 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
             ),
           ],
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: TabBarView(children: [
-                ListView.builder(
-                    itemCount: 72,
+        body: TabBarView(children: [
+          StreamBuilder(
+              stream: FirestoreHelper.readAllNormali(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Some error occurred!'),
+                  );
+                }
+                if (snapshot.hasData) {
+                  final territoriNormaliData = snapshot.data;
+
+                  return ListView.builder(
+                    itemCount: territoriNormaliData!.length,
                     itemBuilder: (context, index) {
-                      return TerritorioNorm(index: ++index);
-                    }),
-                ListView.builder(
-                    itemCount: 72,
+                      final singleTerritorioNormale =
+                          territoriNormaliData[index];
+                      return TerritorioNorm(
+                        territorioNormale: singleTerritorioNormale,
+                      );
+                    },
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }),
+          StreamBuilder(
+              stream: FirestoreHelper.readNormaliDisponibili(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Some error occurred!'),
+                  );
+                }
+                if (snapshot.hasData) {
+                  final territoriNormaliData = snapshot.data;
+
+                  return ListView.builder(
+                    itemCount: territoriNormaliData!.length,
                     itemBuilder: (context, index) {
-                      return TerritorioNorm(index: ++index);
-                    }),
-                ListView.builder(
-                    itemCount: 72,
+                      final singleTerritorioNormale =
+                          territoriNormaliData[index];
+                      return TerritorioNorm(
+                        territorioNormale: singleTerritorioNormale,
+                      );
+                    },
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }),
+          StreamBuilder(
+              stream: FirestoreHelper.readNormaliNonDisponibili(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Some error occurred!'),
+                  );
+                }
+                if (snapshot.hasData) {
+                  final territoriNormaliData = snapshot.data;
+
+                  return ListView.builder(
+                    itemCount: territoriNormaliData!.length,
                     itemBuilder: (context, index) {
-                      return TerritorioNorm(index: ++index);
-                    }),
-              ]),
-            )
-          ],
-        ),
+                      final singleTerritorioNormale =
+                          territoriNormaliData[index];
+                      return TerritorioNorm(
+                        territorioNormale: singleTerritorioNormale,
+                      );
+                    },
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }),
+        ]),
       ),
     );
   }

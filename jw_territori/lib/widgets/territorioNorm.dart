@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioNormaleModel.dart';
 
-import '../pages/dettagliTerritorio.dart';
+import '../pages/dettagliTerritorioNormale.dart';
 
 class TerritorioNorm extends StatefulWidget {
-  TerritorioNorm({super.key, required this.index});
+  TerritorioNorm({super.key, required this.territorioNormale});
 
-  int index;
+  TerritorioNormaleModel territorioNormale;
 
   @override
   State<TerritorioNorm> createState() => _TerritorioNormState();
@@ -27,7 +28,7 @@ class _TerritorioNormState extends State<TerritorioNorm> {
             Row(
               children: [
                 Text(
-                  widget.index.toString(),
+                  '${widget.territorioNormale.numero}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -39,17 +40,23 @@ class _TerritorioNormState extends State<TerritorioNorm> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Fratello in possesso'),
+                    Text(
+                      '${widget.territorioNormale.fratelloInPossesso}',
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
                     Row(
-                      children: const [
-                        Text('Data uscita'),
-                        SizedBox(
+                      children: [
+                        Text(
+                          '${widget.territorioNormale.dataUscita}',
+                        ),
+                        const SizedBox(
                           width: 80,
                         ),
-                        Text('Data limite'),
+                        Text('${widget.territorioNormale.dataLimite}'),
                       ],
                     ),
                   ],
@@ -62,8 +69,9 @@ class _TerritorioNormState extends State<TerritorioNorm> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            DettagliTerritorio(index: widget.index)));
+                        builder: (context) => DettagliTerritorioNormale(
+                              territorioNormale: widget.territorioNormale,
+                            )));
               },
             ),
           ],

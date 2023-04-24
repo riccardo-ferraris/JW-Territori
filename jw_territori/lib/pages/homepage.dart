@@ -11,137 +11,148 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF5A2D81),
-        automaticallyImplyLeading: false,
-        title: Text('Ciao ${user?.email}'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
+    return SingleChildScrollView(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF5A2D81),
+            automaticallyImplyLeading: false,
+            title: Text('Ciao ${user?.email}'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.logout),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
+          body: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TerritoriNormali()));
-                  },
-                  child: Card(
-                    elevation: 8,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      width: 130,
-                      height: 130,
-                      child: const Icon(
-                        Icons.map,
-                        size: 70,
-                        color: Color(0xFF64398B),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TerritoriNormali()));
+                      },
+                      child: Card(
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            color: Colors.white,
+                          ),
+                          width: 130,
+                          height: 130,
+                          child: const Icon(
+                            Icons.map,
+                            size: 70,
+                            color: Color(0xFF64398B),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Text(
+                      'Territori residenziali',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 5,
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TerritoriCommerciali()));
+                      },
+                      child: Card(
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white),
+                          width: 130,
+                          height: 130,
+                          child: const Icon(
+                            Icons.home_work_outlined,
+                            size: 70,
+                            color: Color(0xFF64398B),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Text(
+                      'Territori commerciali',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-                const Text(
-                  'Territori normali',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Registro()));
+                      },
+                      child: Card(
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            color: Colors.white,
+                          ),
+                          width: 130,
+                          height: 130,
+                          child: const Icon(
+                            Icons.menu_book,
+                            size: 70,
+                            color: Color(0xFF64398B),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const Text(
+                      'Registro',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ],
             ),
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const TerritoriCommerciali()));
-                  },
-                  child: Card(
-                    elevation: 8,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Colors.white),
-                      width: 130,
-                      height: 130,
-                      child: const Icon(
-                        Icons.home_work_outlined,
-                        size: 70,
-                        color: Color(0xFF64398B),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text(
-                  'Territori commerciali',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Registro()));
-                  },
-                  child: Card(
-                    elevation: 8,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      width: 130,
-                      height: 130,
-                      child: const Icon(
-                        Icons.menu_book,
-                        size: 70,
-                        color: Color(0xFF64398B),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text(
-                  'Registro',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );

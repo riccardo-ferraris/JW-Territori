@@ -1,18 +1,24 @@
 // ignore: file_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioNormaleModel.dart';
+import 'package:jw_territori/pages/territoriNormali.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 
-class DettagliTerritorio extends StatefulWidget {
-  DettagliTerritorio({super.key, required this.index});
+class DettagliTerritorioNormale extends StatefulWidget {
+  DettagliTerritorioNormale({super.key, required this.territorioNormale});
 
-  int index;
+  TerritorioNormaleModel territorioNormale;
 
   @override
-  State<DettagliTerritorio> createState() => _DettagliTerritorioState();
+  State<DettagliTerritorioNormale> createState() =>
+      _DettagliTerritorioNormaleState();
 }
 
-class _DettagliTerritorioState extends State<DettagliTerritorio> {
+class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
   bool isAssigned = true;
+
+  final controllerFratello = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,32 +40,58 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
+                Text(
+                  "Territorio n° ${widget.territorioNormale.numero}",
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
                 Card(
                   elevation: 8,
                   clipBehavior: Clip.hardEdge,
                   color: const Color.fromARGB(255, 226, 226, 226),
                   shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      side: BorderSide(color: Colors.black)),
                   child: Column(
                     children: [
-                      //!TODO aggiungere controllo per territori commerciali e implementare le immagini adatte
                       Image.asset(
-                        'images/territori/territorio ${widget.index}.jpg',
+                        'images/territori/territorio ${widget.territorioNormale.numero}.jpg',
                         fit: BoxFit.fill,
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      isAssigned
+                      widget.territorioNormale.isDisponibile == !isAssigned
                           ? Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Fratello in possesso',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'Fratello in possesso: \n',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              '  ${widget.territorioNormale.fratelloInPossesso}',
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   const SizedBox(
@@ -68,19 +100,49 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: const [
-                                      Text(
-                                        'Data di uscita',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                    children: [
+                                      RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            const TextSpan(
+                                              text: 'Data di uscita\n',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text:
+                                                  '  ${widget.territorioNormale.dataUscita}',
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Text(
-                                        'Data limite',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                      RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            const TextSpan(
+                                              text: 'Data limite\n',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text:
+                                                  '  ${widget.territorioNormale.dataLimite}',
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -94,21 +156,28 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    'Data di rientro',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text: 'Data rientro\n',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              '  ${widget.territorioNormale.dataRientro}',
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  if (isAssigned)
-                                    const Text(
-                                      'Data limite',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
                                 ],
                               ),
                             )
@@ -118,7 +187,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                 const SizedBox(
                   height: 30,
                 ),
-                isAssigned
+                widget.territorioNormale.isDisponibile == !isAssigned
                     ? TextButton(
                         style: ButtonStyle(
                           backgroundColor:
@@ -148,8 +217,25 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                       onPressed: () {
                                         setState(() {
                                           isAssigned = !isAssigned;
+
+                                          DateTime now = DateTime.now();
+                                          String dataString =
+                                              '${now.day}/${now.month}/${now.year}';
+
+                                          FirestoreHelper
+                                              .updateRiconsegnaNormali(
+                                                  dataString,
+                                                  widget.territorioNormale
+                                                      .numero);
+
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context, '/', (_) => false);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const TerritoriNormali()));
                                         });
-                                        Navigator.pop(context);
                                       },
                                       child: const Text('Si',
                                           style: TextStyle(
@@ -169,6 +255,7 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                     : Column(
                         children: [
                           TextFormField(
+                            controller: controllerFratello,
                             decoration: InputDecoration(
                               fillColor:
                                   const Color.fromARGB(255, 255, 255, 255),
@@ -217,8 +304,26 @@ class _DettagliTerritorioState extends State<DettagliTerritorio> {
                                             onPressed: () {
                                               setState(() {
                                                 isAssigned = !isAssigned;
+
+                                                DateTime now = DateTime.now();
+                                                String dataString =
+                                                    '${now.day}/${now.month}/${now.year}';
+
+                                                FirestoreHelper
+                                                    .updateAffidaNormali(
+                                                        dataString,
+                                                        widget.territorioNormale
+                                                            .numero,
+                                                        controllerFratello
+                                                            .text);
                                               });
-                                              Navigator.pop(context);
+                                              Navigator.pushNamedAndRemoveUntil(
+                                                  context, '/', (_) => false);
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const TerritoriNormali()));
                                             },
                                             child: const Text('Si')),
                                       ],
