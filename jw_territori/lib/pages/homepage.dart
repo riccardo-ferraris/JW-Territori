@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:jw_territori/pages/registro.dart';
 import 'package:jw_territori/pages/territoriCommerciali.dart';
 import 'package:jw_territori/pages/territoriNormali.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  final user = FirebaseAuth.instance.currentUser;
+  final userName = FirestoreHelper.setName(FirebaseAuth.instance);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: const Color(0xFF5A2D81),
             automaticallyImplyLeading: false,
-            title: Text('Ciao ${user?.email}'),
+            title: Text('Ciao ${userName}'),
             actions: [
               IconButton(
                 icon: const Icon(Icons.logout),

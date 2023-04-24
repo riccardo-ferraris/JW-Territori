@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,17 +29,11 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       //Wrong email
       if (e.code == 'user-not-found') {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(title: Text('Email errata'));
-            });
+        FirestoreHelper.createToast('Attenzione! User inesistente.');
       } else if (e.code == 'wrong-password') {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(title: Text('Password errata'));
-            });
+        FirestoreHelper.createToast('Attenzione! Password errata.');
+      } else if (e.code == 'network-request-failed') {
+        FirestoreHelper.createToast('Attenzione! Connessione non attiva.');
       }
     }
   }

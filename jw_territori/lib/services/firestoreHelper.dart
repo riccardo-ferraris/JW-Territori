@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jw_territori/models/territorioNormaleModel.dart';
 
 import '../models/territorioCommercialeModel.dart';
@@ -7,6 +10,36 @@ final territoriCollection =
     FirebaseFirestore.instance.collection('"Territori"');
 
 class FirestoreHelper {
+  //Crea Toast
+  static createToast(String textMessage) {
+    Fluttertoast.showToast(
+        msg: textMessage,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.TOP,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
+  //Set name
+  static setName(FirebaseAuth currentUser) {
+    if (FirebaseAuth.instance.currentUser!.email!.contains('scotti')) {
+      return 'Vincenzo Scotti';
+    } else if (FirebaseAuth.instance.currentUser!.email!.contains('ferraris')) {
+      return 'Riccardo Ferraris';
+    } else if (FirebaseAuth.instance.currentUser!.email!
+        .contains('delgiudice')) {
+      return 'Francesco Del Giudice';
+    } else if (FirebaseAuth.instance.currentUser!.email!.contains('matino')) {
+      return 'Antonio Matino';
+    } else if (FirebaseAuth.instance.currentUser!.email!
+        .contains('caracciolo')) {
+      return 'Francesco Caracciolo';
+    } else {
+      return FirebaseAuth.instance.currentUser!.email;
+    }
+  }
+
 // ! READ DI TUTTI
   static Stream<List<TerritorioNormaleModel>> readAllNormali() {
     final queryTuttiNormali = territoriCollection
