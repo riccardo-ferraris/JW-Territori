@@ -76,7 +76,7 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                     text: TextSpan(
                                       children: [
                                         const TextSpan(
-                                          text: 'Fratello in possesso: \n',
+                                          text: 'Assegnato a: \n',
                                           style: TextStyle(
                                             fontSize: 15,
                                             color: Colors.black,
@@ -261,7 +261,7 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                   const Color.fromARGB(255, 255, 255, 255),
                               filled: true,
                               hintText:
-                                  "Fratello a cui assegnare il territorio",
+                                  "Proclamatore a cui assegnare il territorio",
                               hintStyle: const TextStyle(
                                 color: Color.fromARGB(255, 95, 95, 95),
                               ),
@@ -299,7 +299,11 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            child: const Text('No')),
+                                            child: const Text('No',
+                                                style: TextStyle(
+                                                    color: Color(0xFF5A2D81),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20))),
                                         TextButton(
                                             onPressed: () {
                                               setState(() {
@@ -325,13 +329,17 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                                       builder: (context) =>
                                                           const TerritoriNormali()));
                                             },
-                                            child: const Text('Si')),
+                                            child: const Text('Si',
+                                                style: TextStyle(
+                                                    color: Color(0xFF5A2D81),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20))),
                                       ],
                                     );
                                   });
                             },
                             child: const Text(
-                              'Affida',
+                              'Assegna',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),

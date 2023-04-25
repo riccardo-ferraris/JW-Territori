@@ -60,7 +60,6 @@ class _DettagliTerritorioCommercialeState
                       const SizedBox(
                         height: 10,
                       ),
-                      //isAssigned //? --------------------------------------------------------------------------------
                       widget.territorioCommerciale.isDisponibile == !isAssigned
                           ? Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -71,7 +70,7 @@ class _DettagliTerritorioCommercialeState
                                     text: TextSpan(
                                       children: [
                                         const TextSpan(
-                                          text: 'Fratello in possesso: \n',
+                                          text: 'Assegnato a: \n',
                                           style: TextStyle(
                                             fontSize: 15,
                                             color: Colors.black,
@@ -216,7 +215,6 @@ class _DettagliTerritorioCommercialeState
                                           DateTime now = DateTime.now();
                                           String dataString =
                                               '${now.day}/${now.month}/${now.year}';
-//! DA SISTEMARE
                                           FirestoreHelper
                                               .updateRiconsegnaCommerciali(
                                                   dataString,
@@ -256,7 +254,7 @@ class _DettagliTerritorioCommercialeState
                                   const Color.fromARGB(255, 255, 255, 255),
                               filled: true,
                               hintText:
-                                  "Fratello a cui assegnare il territorio",
+                                  "Proclamatore a cui assegnare il territorio",
                               hintStyle: const TextStyle(
                                 color: Color.fromARGB(255, 95, 95, 95),
                               ),
@@ -303,8 +301,6 @@ class _DettagliTerritorioCommercialeState
                                                 DateTime now = DateTime.now();
                                                 String dataString =
                                                     '${now.day}/${now.month}/${now.year}';
-
-//! DA SISTEMARE
                                                 FirestoreHelper
                                                     .updateAffidaCommerciali(
                                                         dataString,
@@ -328,7 +324,7 @@ class _DettagliTerritorioCommercialeState
                                   });
                             },
                             child: const Text(
-                              'Affida',
+                              'Assegna',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),

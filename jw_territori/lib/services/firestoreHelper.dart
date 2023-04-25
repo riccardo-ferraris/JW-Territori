@@ -9,6 +9,9 @@ import '../models/territorioCommercialeModel.dart';
 final territoriCollection =
     FirebaseFirestore.instance.collection('"Territori"');
 
+final dettagliAssegnazione =
+    FirebaseFirestore.instance.collection('"Territori"/Registro');
+
 class FirestoreHelper {
   //! CREATE TOAST
   static createToast(String textMessage) {
@@ -116,7 +119,7 @@ class FirestoreHelper {
   static Future updateRiconsegnaNormali(String dataAttuale, int? numero) async {
     final docRef = territoriCollection.doc(numero.toString());
     final newTerritorioNormale = TerritorioNormaleModel(
-            fratelloInPossesso: 'Fratello in possesso',
+            fratelloInPossesso: 'Proclamatore in possesso',
             dataLimite: 'Data Limite',
             dataUscita: 'Data Uscita',
             isDisponibile: true,
@@ -165,7 +168,7 @@ class FirestoreHelper {
       String dataAttuale, String? lettera) async {
     final docRef = territoriCollection.doc(lettera);
     final newTerritorioCommerciale = TerritorioCommercialeModel(
-            fratelloInPossesso: 'Fratello in possesso',
+            fratelloInPossesso: 'Proclamatore in possesso',
             dataLimite: 'Data Limite',
             dataUscita: 'Data Uscita',
             isDisponibile: true,
