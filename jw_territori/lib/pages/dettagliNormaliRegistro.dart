@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class DettagliNormaliRegistro extends StatefulWidget {
   DettagliNormaliRegistro({super.key, required this.index});
@@ -31,40 +32,87 @@ class _DettagliNormaliRegistroState extends State<DettagliNormaliRegistro> {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: ListView.separated(
-            itemCount: 10,
+            itemCount: 1,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1)),
-                    child: const Text('Assegnato a:'),
+              return Slidable(
+                startActionPane:
+                    ActionPane(motion: const StretchMotion(), children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return AlertDialog(
+                            title: const Text('Sei sicuro?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'No',
+                                  style: TextStyle(
+                                      color: Color(0xFF5A2D81),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  //!TODO Implementare l'eliminazione di una voce nel registro
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'Si',
+                                  style: TextStyle(
+                                      color: Color(0xFF5A2D81),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
+                      );
+                    },
+                    icon: Icons.delete,
+                    label: 'Elimina',
+                    backgroundColor: Colors.red,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black, width: 1)),
-                          child: const Text('Data Uscita:'),
+                ]),
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 1)),
+                      child: const Text('Assegnato a:'),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
+                            child: const Text('Data Uscita:'),
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black, width: 1)),
-                          child: const Text('Data Rientro:'),
+                        Expanded(
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
+                            child: const Text('Data Rientro:'),
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                      ],
+                    )
+                  ],
+                ),
               );
             },
             separatorBuilder: (BuildContext context, int index) =>

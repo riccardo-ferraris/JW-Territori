@@ -9,8 +9,7 @@ import '../models/territorioCommercialeModel.dart';
 final territoriCollection =
     FirebaseFirestore.instance.collection('"Territori"');
 
-final dettagliAssegnazione =
-    FirebaseFirestore.instance.collection('"Territori"/Registro');
+final elencoAssegnazione = FirebaseFirestore.instance.collection('Registro');
 
 class FirestoreHelper {
   //! CREATE TOAST
@@ -210,5 +209,34 @@ class FirestoreHelper {
     } catch (e) {
       print('Some error occurred $e');
     }
+  }
+
+  //! UPDATE DEL REGISTRO
+  static Future createAffidaRegistro(
+      String dataAttuale, int? numero, String fratello) async {
+    final elencoAssegnazioneCollection =
+        elencoAssegnazione.doc(numero.toString()).collection('Elenco');
+
+    final docRef = elencoAssegnazioneCollection.doc('0');
+
+    await docRef.set({
+      'fratelloInPossesso': fratello,
+      'dataUscita': dataAttuale,
+      'dataRientro': '',
+    });
+  }
+
+  static Future updateRiconsegnaRegistro(String dataAttuale, int? numero,
+      String? fratello, String? dataUscita) async {
+    final elencoAssegnazioneCollection =
+        elencoAssegnazione.doc(numero.toString()).collection('Elenco');
+
+    final docRef = elencoAssegnazioneCollection.doc('0');
+
+    await docRef.update({
+      'fratelloInPossesso': fratello,
+      'dataRientro': dataAttuale,
+      'dataUscita': dataUscita,
+    });
   }
 }

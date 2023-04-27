@@ -29,7 +29,7 @@ class _ElencoNormaliRegistroState extends State<ElencoNormaliRegistro> {
         child: Center(
           child: Text(
             '${widget.index}',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),
       ),

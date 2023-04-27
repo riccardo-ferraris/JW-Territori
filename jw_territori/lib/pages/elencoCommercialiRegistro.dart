@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'dettagliCommercialiRegistro.dart';
-import 'dettagliNormaliRegistro.dart';
 
 class ElencoCommercialiRegistro extends StatefulWidget {
   ElencoCommercialiRegistro({super.key, required this.index});

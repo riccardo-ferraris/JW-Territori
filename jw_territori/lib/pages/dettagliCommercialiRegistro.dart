@@ -40,7 +40,8 @@ class _DettagliCommercialiRegistroState
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1)),
+                      border: Border.all(color: Colors.black, width: 1),
+                    ),
                     child: const Text('Assegnato a:'),
                   ),
                   Row(
@@ -49,8 +50,8 @@ class _DettagliCommercialiRegistroState
                         child: Container(
                           height: 50,
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black, width: 1)),
+                            border: Border.all(color: Colors.black, width: 1),
+                          ),
                           child: const Text('Data Uscita:'),
                         ),
                       ),
@@ -58,8 +59,8 @@ class _DettagliCommercialiRegistroState
                         child: Container(
                           height: 50,
                           decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black, width: 1)),
+                            border: Border.all(color: Colors.black, width: 1),
+                          ),
                           child: const Text('Data Rientro:'),
                         ),
                       ),

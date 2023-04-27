@@ -228,6 +228,16 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                                   widget.territorioNormale
                                                       .numero);
 
+                                          FirestoreHelper
+                                              .updateRiconsegnaRegistro(
+                                                  dataString,
+                                                  widget
+                                                      .territorioNormale.numero,
+                                                  widget.territorioNormale
+                                                      .fratelloInPossesso,
+                                                  widget.territorioNormale
+                                                      .dataUscita);
+
                                           Navigator.pushNamedAndRemoveUntil(
                                               context, '/', (_) => false);
                                           Navigator.push(
@@ -315,6 +325,14 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
 
                                                 FirestoreHelper
                                                     .updateAffidaNormali(
+                                                        dataString,
+                                                        widget.territorioNormale
+                                                            .numero,
+                                                        controllerFratello
+                                                            .text);
+
+                                                FirestoreHelper
+                                                    .createAffidaRegistro(
                                                         dataString,
                                                         widget.territorioNormale
                                                             .numero,
