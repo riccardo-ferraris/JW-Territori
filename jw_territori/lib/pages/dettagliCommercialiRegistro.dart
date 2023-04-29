@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jw_territori/widgets/elencoRegistroCard.dart';
 
 class DettagliCommercialiRegistro extends StatefulWidget {
   DettagliCommercialiRegistro({super.key, required this.index});
@@ -34,40 +35,7 @@ class _DettagliCommercialiRegistroState
           child: ListView.separated(
             itemCount: 10,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 1),
-                    ),
-                    child: const Text('Assegnato a:'),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 1),
-                          ),
-                          child: const Text('Data Uscita:'),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 1),
-                          ),
-                          child: const Text('Data Rientro:'),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              );
+              return const ElencoRegistroCard();
             },
             separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),
