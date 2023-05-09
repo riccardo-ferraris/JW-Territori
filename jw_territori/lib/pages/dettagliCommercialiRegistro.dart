@@ -35,7 +35,7 @@ class _DettagliCommercialiRegistroState
           child: ListView.separated(
             itemCount: 10,
             itemBuilder: (context, index) {
-              return const ElencoRegistroCard();
+              return ElencoRegistroCard();
             },
             separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),

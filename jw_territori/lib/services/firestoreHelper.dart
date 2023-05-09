@@ -233,14 +233,4 @@ class FirestoreHelper {
       print('Some error occurred $e');
     }
   }
-
-  static Stream<List<TerritorioNormaleModel>> readNormaliRegistro(int? numero) {
-    final elencoAssegnazioneCollection =
-        elencoAssegnazione.doc(numero.toString()).collection('Elenco');
-
-    return elencoAssegnazioneCollection.snapshots().map((querySnapshot) =>
-        querySnapshot.docs
-            .map((e) => TerritorioNormaleModel.fromSnapshot(e))
-            .toList());
-  }
 }
