@@ -28,7 +28,7 @@ class FirestoreHelper {
     if (FirebaseAuth.instance.currentUser!.email!.contains('scotti')) {
       return 'Vincenzo Scotti';
     } else if (FirebaseAuth.instance.currentUser!.email!.contains('ferraris')) {
-      return 'Riccardo Ferraris';
+      return 'Riccardo Kevin Ferraris';
     } else if (FirebaseAuth.instance.currentUser!.email!
         .contains('delgiudice')) {
       return 'Francesco Del Giudice';
@@ -115,8 +115,13 @@ class FirestoreHelper {
   }
 
 //! UPDATE TERRITORI NORMALI
-  static Future updateRiconsegnaNormali(String dataAttuale, int? numero) async {
+  static Future updateRiconsegnaNormali(String dataAttuale, int? numero,
+      String? fratello, String? dataUscita, String? id) async {
+    final elencoAssegnazioneCollection =
+        elencoAssegnazione.doc(numero.toString()).collection('Elenco');
+
     final docRef = territoriCollection.doc(numero.toString());
+
     final newTerritorioNormale = TerritorioNormaleModel(
             fratelloInPossesso: 'Proclamatore in possesso',
             dataLimite: 'Data Limite',
@@ -124,11 +129,18 @@ class FirestoreHelper {
             isDisponibile: true,
             dataRientro: dataAttuale,
             isNormale: true,
-            numero: numero)
+            numero: numero,
+            id: id)
         .toJson();
-
+    final docRef2 = elencoAssegnazioneCollection.doc(id);
     try {
       await docRef.update(newTerritorioNormale);
+      await docRef2.update({
+        'id': id,
+        'fratelloInPossesso': fratello,
+        'dataRientro': dataAttuale,
+        'dataUscita': dataUscita,
+      });
     } catch (e) {
       print('Some error occurred $e');
     }
@@ -145,18 +157,29 @@ class FirestoreHelper {
     }
 
     final docRef = territoriCollection.doc(numero.toString());
+    final elencoAssegnazioneCollection =
+        elencoAssegnazione.doc(numero.toString()).collection('Elenco');
+
+    final docRef2 = elencoAssegnazioneCollection.doc();
     final newTerritorioNormale = TerritorioNormaleModel(
-            fratelloInPossesso: fratello,
-            dataLimite: dataRientroFormat,
-            dataUscita: dataAttuale,
-            isDisponibile: false,
-            dataRientro: 'Data Rientro',
-            isNormale: true,
-            numero: numero)
-        .toJson();
+      fratelloInPossesso: fratello,
+      dataLimite: dataRientroFormat,
+      dataUscita: dataAttuale,
+      isDisponibile: false,
+      dataRientro: 'Data Rientro',
+      isNormale: true,
+      numero: numero,
+      id: docRef2.id,
+    ).toJson();
 
     try {
       await docRef.update(newTerritorioNormale);
+      await docRef2.set({
+        'id': docRef2.id,
+        'fratelloInPossesso': fratello,
+        'dataUscita': dataAttuale,
+        'dataRientro': '',
+      });
     } catch (e) {
       print('Some error occurred $e');
     }
@@ -211,32 +234,13 @@ class FirestoreHelper {
     }
   }
 
-  //! UPDATE DEL REGISTRO
-  static Future createAffidaRegistro(
-      String dataAttuale, int? numero, String fratello) async {
+  static Stream<List<TerritorioNormaleModel>> readNormaliRegistro(int? numero) {
     final elencoAssegnazioneCollection =
         elencoAssegnazione.doc(numero.toString()).collection('Elenco');
 
-    final docRef = elencoAssegnazioneCollection.doc('0');
-
-    await docRef.set({
-      'fratelloInPossesso': fratello,
-      'dataUscita': dataAttuale,
-      'dataRientro': '',
-    });
-  }
-
-  static Future updateRiconsegnaRegistro(String dataAttuale, int? numero,
-      String? fratello, String? dataUscita) async {
-    final elencoAssegnazioneCollection =
-        elencoAssegnazione.doc(numero.toString()).collection('Elenco');
-
-    final docRef = elencoAssegnazioneCollection.doc('0');
-
-    await docRef.update({
-      'fratelloInPossesso': fratello,
-      'dataRientro': dataAttuale,
-      'dataUscita': dataUscita,
-    });
+    return elencoAssegnazioneCollection.snapshots().map((querySnapshot) =>
+        querySnapshot.docs
+            .map((e) => TerritorioNormaleModel.fromSnapshot(e))
+            .toList());
   }
 }

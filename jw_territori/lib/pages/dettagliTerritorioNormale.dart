@@ -225,18 +225,13 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                           FirestoreHelper
                                               .updateRiconsegnaNormali(
                                                   dataString,
-                                                  widget.territorioNormale
-                                                      .numero);
-
-                                          FirestoreHelper
-                                              .updateRiconsegnaRegistro(
-                                                  dataString,
                                                   widget
                                                       .territorioNormale.numero,
                                                   widget.territorioNormale
                                                       .fratelloInPossesso,
                                                   widget.territorioNormale
-                                                      .dataUscita);
+                                                      .dataUscita,
+                                                  widget.territorioNormale.id);
 
                                           Navigator.pushNamedAndRemoveUntil(
                                               context, '/', (_) => false);
@@ -325,14 +320,6 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
 
                                                 FirestoreHelper
                                                     .updateAffidaNormali(
-                                                        dataString,
-                                                        widget.territorioNormale
-                                                            .numero,
-                                                        controllerFratello
-                                                            .text);
-
-                                                FirestoreHelper
-                                                    .createAffidaRegistro(
                                                         dataString,
                                                         widget.territorioNormale
                                                             .numero,

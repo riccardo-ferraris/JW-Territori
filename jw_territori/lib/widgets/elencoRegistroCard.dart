@@ -63,7 +63,20 @@ class _ElencoRegistroCardState extends State<ElencoRegistroCard> {
             height: 50,
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 1)),
-            child: const Text('Assegnato a:'),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('Assegnato a:',
+                    style: TextStyle(
+                      fontSize: 14,
+                    )),
+                Center(
+                    child: Text(
+                  'Riccardo Ferraris',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                )),
+              ],
+            ),
           ),
           Row(
             children: [
@@ -72,7 +85,21 @@ class _ElencoRegistroCardState extends State<ElencoRegistroCard> {
                   height: 50,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black, width: 1)),
-                  child: const Text('Data Uscita:'),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('Data Uscita:',
+                          style: TextStyle(
+                            fontSize: 14,
+                          )),
+                      Center(
+                          child: Text(
+                        '29/04/2023',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      )),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -80,7 +107,21 @@ class _ElencoRegistroCardState extends State<ElencoRegistroCard> {
                   height: 50,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black, width: 1)),
-                  child: const Text('Data Rientro:'),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('Data Rientro:',
+                          style: TextStyle(
+                            fontSize: 14,
+                          )),
+                      Center(
+                          child: Text(
+                        '29/04/2023',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      )),
+                    ],
+                  ),
                 ),
               ),
             ],

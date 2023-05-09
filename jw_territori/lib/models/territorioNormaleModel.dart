@@ -8,6 +8,7 @@ class TerritorioNormaleModel {
   final bool? isDisponibile;
   final bool? isNormale;
   final int? numero;
+  final String? id;
 
   TerritorioNormaleModel(
       {this.dataUscita,
@@ -16,7 +17,8 @@ class TerritorioNormaleModel {
       this.numero,
       this.fratelloInPossesso,
       this.dataLimite,
-      this.dataRientro});
+      this.dataRientro,
+      this.id});
 
   factory TerritorioNormaleModel.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
@@ -29,6 +31,7 @@ class TerritorioNormaleModel {
       isDisponibile: snapshot['isDisponibile'],
       isNormale: snapshot['isNormale'],
       numero: snapshot['numero'],
+      id: snapshot['id'],
     );
   }
 
@@ -40,5 +43,6 @@ class TerritorioNormaleModel {
         'isDisponibile': isDisponibile,
         'isNormale': isNormale,
         'numero': numero,
+        'id': id,
       };
 }

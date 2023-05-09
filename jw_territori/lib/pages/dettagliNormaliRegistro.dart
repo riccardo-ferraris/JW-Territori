@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 import 'package:jw_territori/widgets/elencoRegistroCard.dart';
 
 class DettagliNormaliRegistro extends StatefulWidget {
@@ -33,7 +33,7 @@ class _DettagliNormaliRegistroState extends State<DettagliNormaliRegistro> {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: ListView.separated(
-            itemCount: 1,
+            itemCount: 10,
             itemBuilder: (context, index) {
               return const ElencoRegistroCard();
             },
