@@ -8,6 +8,8 @@ class TerritorioCommercialeModel {
   final bool? isDisponibile;
   final bool? isNormale;
   final String? lettera;
+  final String? id;
+  final timestamp;
 
   TerritorioCommercialeModel(
       {this.dataUscita,
@@ -16,7 +18,9 @@ class TerritorioCommercialeModel {
       this.lettera,
       this.fratelloInPossesso,
       this.dataLimite,
-      this.dataRientro});
+      this.dataRientro,
+      this.id,
+      this.timestamp});
 
   factory TerritorioCommercialeModel.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
@@ -29,6 +33,8 @@ class TerritorioCommercialeModel {
       isDisponibile: snapshot['isDisponibile'],
       isNormale: snapshot['isNormale'],
       lettera: snapshot['lettera'],
+      id: snapshot['id'],
+      timestamp: snapshot['timestamp'],
     );
   }
 
@@ -40,5 +46,7 @@ class TerritorioCommercialeModel {
         'isDisponibile': isDisponibile,
         'isNormale': isNormale,
         'lettera': lettera,
+        'id': id,
+        'timestamp': timestamp
       };
 }

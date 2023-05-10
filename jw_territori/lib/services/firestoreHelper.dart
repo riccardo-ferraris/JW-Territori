@@ -65,6 +65,27 @@ class FirestoreHelper {
             .toList());
   }
 
+  // ! READ DI TUTTI SORTED
+  static Stream<List<TerritorioNormaleModel>> readAllNormaliSorted() {
+    final queryTuttiNormali = territoriCollection
+        .where('isNormale', isEqualTo: true)
+        .orderBy('timestamp');
+    return queryTuttiNormali.snapshots().map((querySnapshot) => querySnapshot
+        .docs
+        .map((e) => TerritorioNormaleModel.fromSnapshot(e))
+        .toList());
+  }
+
+  static Stream<List<TerritorioCommercialeModel>> readAllCommercialiSorted() {
+    final queryTuttiCommerciali = territoriCollection
+        .where('isNormale', isEqualTo: false)
+        .orderBy('timestamp');
+    return queryTuttiCommerciali.snapshots().map((querySnapshot) =>
+        querySnapshot.docs
+            .map((e) => TerritorioCommercialeModel.fromSnapshot(e))
+            .toList());
+  }
+
   // ! DISPONIBILI
   static Stream<List<TerritorioNormaleModel>> readNormaliDisponibili() {
     final queryDisponibili = territoriCollection
@@ -83,6 +104,32 @@ class FirestoreHelper {
         .where('isDisponibile', isEqualTo: true)
         .where('isNormale', isEqualTo: false)
         .orderBy('lettera');
+
+    return queryDisponibili.snapshots().map((querySnapshot) => querySnapshot
+        .docs
+        .map((e) => TerritorioCommercialeModel.fromSnapshot(e))
+        .toList());
+  }
+
+  // ! DISPONIBILI SORTED
+  static Stream<List<TerritorioNormaleModel>> readNormaliDisponibiliSorted() {
+    final queryDisponibili = territoriCollection
+        .where('isDisponibile', isEqualTo: true)
+        .where('isNormale', isEqualTo: true)
+        .orderBy('timestamp');
+
+    return queryDisponibili.snapshots().map((querySnapshot) => querySnapshot
+        .docs
+        .map((e) => TerritorioNormaleModel.fromSnapshot(e))
+        .toList());
+  }
+
+  static Stream<List<TerritorioCommercialeModel>>
+      readCommercialiDisponibiliSorted() {
+    final queryDisponibili = territoriCollection
+        .where('isDisponibile', isEqualTo: true)
+        .where('isNormale', isEqualTo: false)
+        .orderBy('timestamp');
 
     return queryDisponibili.snapshots().map((querySnapshot) => querySnapshot
         .docs
@@ -116,6 +163,33 @@ class FirestoreHelper {
         .toList());
   }
 
+  // ! NON DISPONIBILI SORTED
+  static Stream<List<TerritorioNormaleModel>>
+      readNormaliNonDisponibiliSorted() {
+    final queryDisponibili = territoriCollection
+        .where('isDisponibile', isEqualTo: false)
+        .where('isNormale', isEqualTo: true)
+        .orderBy('timestamp');
+
+    return queryDisponibili.snapshots().map((querySnapshot) => querySnapshot
+        .docs
+        .map((e) => TerritorioNormaleModel.fromSnapshot(e))
+        .toList());
+  }
+
+  static Stream<List<TerritorioCommercialeModel>>
+      readCommercialiNonDisponibiliSorted() {
+    final queryDisponibili = territoriCollection
+        .where('isDisponibile', isEqualTo: false)
+        .where('isNormale', isEqualTo: false)
+        .orderBy('timestamp');
+
+    return queryDisponibili.snapshots().map((querySnapshot) => querySnapshot
+        .docs
+        .map((e) => TerritorioCommercialeModel.fromSnapshot(e))
+        .toList());
+  }
+
 //! UPDATE TERRITORI NORMALI
   static Future updateRiconsegnaNormali(String dataAttuale, int? numero,
       String? fratello, String? dataUscita, String? id) async {
@@ -125,15 +199,16 @@ class FirestoreHelper {
     final docRef = territoriCollection.doc(numero.toString());
 
     final newTerritorioNormale = TerritorioNormaleModel(
-            fratelloInPossesso: 'Proclamatore in possesso',
-            dataLimite: 'Data Limite',
-            dataUscita: 'Data Uscita',
-            isDisponibile: true,
-            dataRientro: dataAttuale,
-            isNormale: true,
-            numero: numero,
-            id: id)
-        .toJson();
+      fratelloInPossesso: 'Proclamatore in possesso',
+      dataLimite: 'Data Limite',
+      dataUscita: 'Data Uscita',
+      isDisponibile: true,
+      dataRientro: dataAttuale,
+      isNormale: true,
+      numero: numero,
+      id: id,
+      timestamp: FieldValue.serverTimestamp(),
+    ).toJson();
     final docRef2 = elencoAssegnazioneCollection.doc(id);
     try {
       await docRef.update(newTerritorioNormale);
@@ -173,6 +248,7 @@ class FirestoreHelper {
       isNormale: true,
       numero: numero,
       id: docRef2.id,
+      timestamp: FieldValue.serverTimestamp(),
     ).toJson();
 
     try {
@@ -190,8 +266,10 @@ class FirestoreHelper {
   }
 
   //! UPDATE TERRITORI COMMERCIALI
-  static Future updateRiconsegnaCommerciali(
-      String dataAttuale, String? lettera) async {
+  static Future updateRiconsegnaCommerciali(String dataAttuale, String? lettera,
+      String? fratello, String? dataUscita, String? id) async {
+    final elencoAssegnazioneCollection =
+        elencoAssegnazione.doc(lettera).collection('Elenco');
     final docRef = territoriCollection.doc(lettera);
     final newTerritorioCommerciale = TerritorioCommercialeModel(
             fratelloInPossesso: 'Proclamatore in possesso',
@@ -200,11 +278,21 @@ class FirestoreHelper {
             isDisponibile: true,
             dataRientro: dataAttuale,
             isNormale: false,
-            lettera: lettera)
+            lettera: lettera,
+            id: id,
+            timestamp: FieldValue.serverTimestamp())
         .toJson();
+    final docRef2 = elencoAssegnazioneCollection.doc(id);
 
     try {
       await docRef.update(newTerritorioCommerciale);
+      await docRef2.update({
+        'id': id,
+        'fratelloInPossesso': fratello,
+        'dataRientro': dataAttuale,
+        'dataUscita': dataUscita,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
     } catch (e) {
       print('Some error occurred $e');
     }
@@ -221,6 +309,10 @@ class FirestoreHelper {
     }
 
     final docRef = territoriCollection.doc(lettera);
+    final elencoAssegnazioneCollection =
+        elencoAssegnazione.doc(lettera).collection('Elenco');
+
+    final docRef2 = elencoAssegnazioneCollection.doc();
     final newTerritorioCommerciale = TerritorioCommercialeModel(
             fratelloInPossesso: fratello,
             dataLimite: dataRientroFormat,
@@ -228,11 +320,20 @@ class FirestoreHelper {
             isDisponibile: false,
             dataRientro: 'Data Rientro',
             isNormale: false,
-            lettera: lettera)
+            lettera: lettera,
+            id: docRef2.id,
+            timestamp: FieldValue.serverTimestamp())
         .toJson();
 
     try {
       await docRef.update(newTerritorioCommerciale);
+      await docRef2.set({
+        'id': docRef2.id,
+        'fratelloInPossesso': fratello,
+        'dataUscita': dataAttuale,
+        'dataRientro': '',
+        'timestamp': FieldValue.serverTimestamp(),
+      });
     } catch (e) {
       print('Some error occurred $e');
     }

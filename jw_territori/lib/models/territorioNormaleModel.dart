@@ -9,6 +9,7 @@ class TerritorioNormaleModel {
   final bool? isNormale;
   final int? numero;
   final String? id;
+  final timestamp;
 
   TerritorioNormaleModel(
       {this.dataUscita,
@@ -18,21 +19,22 @@ class TerritorioNormaleModel {
       this.fratelloInPossesso,
       this.dataLimite,
       this.dataRientro,
-      this.id});
+      this.id,
+      this.timestamp});
 
   factory TerritorioNormaleModel.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
     return TerritorioNormaleModel(
-      fratelloInPossesso: snapshot['fratelloInPossesso'],
-      dataLimite: snapshot['dataLimite'],
-      dataRientro: snapshot['dataRientro'],
-      dataUscita: snapshot['dataUscita'],
-      isDisponibile: snapshot['isDisponibile'],
-      isNormale: snapshot['isNormale'],
-      numero: snapshot['numero'],
-      id: snapshot['id'],
-    );
+        fratelloInPossesso: snapshot['fratelloInPossesso'],
+        dataLimite: snapshot['dataLimite'],
+        dataRientro: snapshot['dataRientro'],
+        dataUscita: snapshot['dataUscita'],
+        isDisponibile: snapshot['isDisponibile'],
+        isNormale: snapshot['isNormale'],
+        numero: snapshot['numero'],
+        id: snapshot['id'],
+        timestamp: snapshot['timestamp']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -44,5 +46,6 @@ class TerritorioNormaleModel {
         'isNormale': isNormale,
         'numero': numero,
         'id': id,
+        'timestamp': timestamp,
       };
 }

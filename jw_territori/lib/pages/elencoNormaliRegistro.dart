@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioNormaleModel.dart';
 import 'package:jw_territori/pages/dettagliNormaliRegistro.dart';
 
 class ElencoNormaliRegistro extends StatefulWidget {
-  ElencoNormaliRegistro({super.key, required this.index});
+  ElencoNormaliRegistro(
+      {super.key, required this.index, required this.territorioNormale});
 
+  TerritorioNormaleModel territorioNormale;
   int index;
 
   @override
@@ -28,7 +31,7 @@ class _ElencoNormaliRegistroState extends State<ElencoNormaliRegistro> {
         elevation: 6,
         child: Center(
           child: Text(
-            '${widget.index}',
+            '${widget.territorioNormale.numero}',
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),

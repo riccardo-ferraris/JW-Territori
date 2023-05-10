@@ -46,15 +46,41 @@ class _RegistroState extends State<Registro> {
         ),
         body: TabBarView(
           children: [
-            GridView.builder(
-              itemCount: 72,
-              itemBuilder: (BuildContext context, int index) {
-                return ElencoNormaliRegistro(index: ++index);
-              },
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-            ),
+            StreamBuilder(
+                stream: FirestoreHelper.readAllNormali(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Some error occurred!'),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    final territoriNormaliData = snapshot.data;
+                    return GridView.builder(
+                      itemCount: territoriNormaliData!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final singleTerritorioNormale =
+                            territoriNormaliData[index];
+                        return ElencoNormaliRegistro(
+                          index: ++index,
+                          territorioNormale: singleTerritorioNormale,
+                        );
+                      },
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
             StreamBuilder(
                 stream: FirestoreHelper.readAllCommerciali(),
                 builder: (context, snapshot) {

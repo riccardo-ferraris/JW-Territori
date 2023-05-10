@@ -219,7 +219,13 @@ class _DettagliTerritorioCommercialeState
                                               .updateRiconsegnaCommerciali(
                                                   dataString,
                                                   widget.territorioCommerciale
-                                                      .lettera);
+                                                      .lettera,
+                                                  widget.territorioCommerciale
+                                                      .fratelloInPossesso,
+                                                  widget.territorioCommerciale
+                                                      .dataUscita,
+                                                  widget.territorioCommerciale
+                                                      .id);
 
                                           Navigator.pushNamedAndRemoveUntil(
                                               context, '/', (_) => false);
@@ -292,7 +298,11 @@ class _DettagliTerritorioCommercialeState
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            child: const Text('No')),
+                                            child: const Text('No',
+                                                style: TextStyle(
+                                                    color: Color(0xFF5A2D81),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20))),
                                         TextButton(
                                             onPressed: () {
                                               setState(() {
@@ -318,7 +328,11 @@ class _DettagliTerritorioCommercialeState
                                                       builder: (context) =>
                                                           const TerritoriCommerciali()));
                                             },
-                                            child: const Text('Si')),
+                                            child: const Text('Si',
+                                                style: TextStyle(
+                                                    color: Color(0xFF5A2D81),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20))),
                                       ],
                                     );
                                   });
