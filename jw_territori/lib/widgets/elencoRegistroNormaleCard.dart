@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:jw_territori/models/cardRegistroNormaleModel.dart';
 
-class ElencoRegistroCard extends StatefulWidget {
-  ElencoRegistroCard({super.key});
+class ElencoRegistroNormaleCard extends StatefulWidget {
+  ElencoRegistroNormaleCard({super.key, required this.cardRegistroNormale});
 
+  CardRegistroNormaleModel cardRegistroNormale;
   @override
-  State<ElencoRegistroCard> createState() => _ElencoRegistroCardState();
+  State<ElencoRegistroNormaleCard> createState() =>
+      _ElencoRegistroNormaleCardState();
 }
 
-class _ElencoRegistroCardState extends State<ElencoRegistroCard> {
+class _ElencoRegistroNormaleCardState extends State<ElencoRegistroNormaleCard> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,15 +23,16 @@ class _ElencoRegistroCardState extends State<ElencoRegistroCard> {
               BoxDecoration(border: Border.all(color: Colors.black, width: 1)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Assegnato a:',
+            children: [
+              const Text('Assegnato a:',
                   style: TextStyle(
                     fontSize: 14,
                   )),
               Center(
                   child: Text(
-                'Riccardo Ferraris',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                '${widget.cardRegistroNormale.fratelloInPossesso}',
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               )),
             ],
           ),
@@ -42,16 +46,16 @@ class _ElencoRegistroCardState extends State<ElencoRegistroCard> {
                     border: Border.all(color: Colors.black, width: 1)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Data Uscita:',
+                  children: [
+                    const Text('Data Uscita:',
                         style: TextStyle(
                           fontSize: 14,
                         )),
                     Center(
                         child: Text(
-                      '29/04/2023',
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                      '${widget.cardRegistroNormale.dataUscita}',
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold),
                     )),
                   ],
                 ),
@@ -64,16 +68,16 @@ class _ElencoRegistroCardState extends State<ElencoRegistroCard> {
                     border: Border.all(color: Colors.black, width: 1)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text('Data Rientro:',
+                  children: [
+                    const Text('Data Rientro:',
                         style: TextStyle(
                           fontSize: 14,
                         )),
                     Center(
                         child: Text(
-                      '29/04/2023',
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                      '${widget.cardRegistroNormale.dataRientro}',
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold),
                     )),
                   ],
                 ),

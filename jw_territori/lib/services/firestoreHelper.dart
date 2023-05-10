@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:jw_territori/models/cardRegistroNormaleModel.dart';
 import 'package:jw_territori/models/territorioNormaleModel.dart';
 
+import '../models/cardRegistroCommercialeModel.dart';
 import '../models/territorioCommercialeModel.dart';
 
 final territoriCollection =
@@ -140,6 +142,7 @@ class FirestoreHelper {
         'fratelloInPossesso': fratello,
         'dataRientro': dataAttuale,
         'dataUscita': dataUscita,
+        'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
       print('Some error occurred $e');
@@ -179,6 +182,7 @@ class FirestoreHelper {
         'fratelloInPossesso': fratello,
         'dataUscita': dataAttuale,
         'dataRientro': '',
+        'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
       print('Some error occurred $e');
@@ -232,5 +236,35 @@ class FirestoreHelper {
     } catch (e) {
       print('Some error occurred $e');
     }
+  }
+
+  //! READ ELENCO REGISTRO TERRITORI NORMALI
+  static Stream<List<CardRegistroNormaleModel>> readElencoRegistroNormali(
+      index) {
+    final elencoAssegnazioneCollection = FirebaseFirestore.instance
+        .collection('Registro')
+        .doc(index.toString())
+        .collection('Elenco')
+        .orderBy('timestamp', descending: true);
+
+    return elencoAssegnazioneCollection.snapshots().map((querySnapshot) =>
+        querySnapshot.docs
+            .map((e) => CardRegistroNormaleModel.fromSnapshot(e))
+            .toList());
+  }
+
+  //! READ ELENCO REGISTRO TERRITORI COMMERCIALI
+  static Stream<List<CardRegistroCommercialeModel>>
+      readElencoRegistroCommerciali(lettera) {
+    final elencoAssegnazioneCollection = FirebaseFirestore.instance
+        .collection('Registro')
+        .doc(lettera)
+        .collection('Elenco')
+        .orderBy('timestamp', descending: true);
+
+    return elencoAssegnazioneCollection.snapshots().map((querySnapshot) =>
+        querySnapshot.docs
+            .map((e) => CardRegistroCommercialeModel.fromSnapshot(e))
+            .toList());
   }
 }

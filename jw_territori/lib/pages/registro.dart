@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jw_territori/pages/elencoNormaliRegistro.dart';
+import 'package:jw_territori/services/firestoreHelper.dart';
 
 import 'elencoCommercialiRegistro.dart';
 
@@ -54,15 +55,41 @@ class _RegistroState extends State<Registro> {
                 crossAxisCount: 3,
               ),
             ),
-            GridView.builder(
-              itemCount: 11,
-              itemBuilder: (BuildContext context, int index) {
-                return ElencoCommercialiRegistro(index: ++index);
-              },
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-            ),
+            StreamBuilder(
+                stream: FirestoreHelper.readAllCommerciali(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Some error occurred!'),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    final territoriCommercialiData = snapshot.data;
+                    return GridView.builder(
+                      itemCount: territoriCommercialiData!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final singleTerritorioCommerciale =
+                            territoriCommercialiData[index];
+                        return ElencoCommercialiRegistro(
+                          index: ++index,
+                          territorioCommerciale: singleTerritorioCommerciale,
+                        );
+                      },
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
           ],
         ),
       ),

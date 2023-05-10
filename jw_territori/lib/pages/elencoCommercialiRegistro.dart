@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorioCommercialeModel.dart';
 
 import 'dettagliCommercialiRegistro.dart';
 
 class ElencoCommercialiRegistro extends StatefulWidget {
-  ElencoCommercialiRegistro({super.key, required this.index});
+  ElencoCommercialiRegistro(
+      {super.key, required this.index, required this.territorioCommerciale});
 
+  TerritorioCommercialeModel territorioCommerciale;
   int index;
 
   @override
@@ -20,8 +23,10 @@ class _ElencoCommercialiRegistroState extends State<ElencoCommercialiRegistro> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    DettagliCommercialiRegistro(index: widget.index)));
+                builder: (context) => DettagliCommercialiRegistro(
+                      index: widget.index,
+                      territorioCommerciale: widget.territorioCommerciale,
+                    )));
       },
       child: Card(
         shape: const RoundedRectangleBorder(
@@ -30,7 +35,7 @@ class _ElencoCommercialiRegistroState extends State<ElencoCommercialiRegistro> {
         elevation: 6,
         child: Center(
           child: Text(
-            String.fromCharCode((widget.index + 64)),
+            '${widget.territorioCommerciale.lettera}',
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),
