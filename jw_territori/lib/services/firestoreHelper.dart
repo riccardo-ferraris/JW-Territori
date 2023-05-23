@@ -36,9 +36,10 @@ class FirestoreHelper {
       return 'Francesco Del Giudice';
     } else if (FirebaseAuth.instance.currentUser!.email!.contains('matino')) {
       return 'Antonio Matino';
-    } else if (FirebaseAuth.instance.currentUser!.email!
-        .contains('caracciolo')) {
+    } else if (FirebaseAuth.instance.currentUser!.email!.contains('kekko')) {
       return 'Francesco Caracciolo';
+    } else if (FirebaseAuth.instance.currentUser!.email!.contains('ammaturo')) {
+      return 'Pietro Ammaturo';
     } else {
       return FirebaseAuth.instance.currentUser!.email;
     }

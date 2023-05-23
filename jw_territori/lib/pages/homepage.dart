@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: const Color(0xFF5A2D81),
             automaticallyImplyLeading: false,
-            title: Text('Ciao ${userName}'),
+            title: Text('Ciao $userName'),
             actions: [
               IconButton(
                 icon: const Icon(Icons.logout),

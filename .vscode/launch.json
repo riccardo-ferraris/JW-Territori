@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "jw_territori",
+            "cwd": "jw_territori",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "jw_territori (profile mode)",
+            "cwd": "jw_territori",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "jw_territori (release mode)",
+            "cwd": "jw_territori",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
