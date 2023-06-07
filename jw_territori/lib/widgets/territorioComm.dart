@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/territorioCommercialeModel.dart';
 import '../pages/dettagliTerritorioCommerciale.dart';
+import '../services/date_parser.dart';
 
 class TerritorioComm extends StatefulWidget {
   TerritorioComm({super.key, required this.territorioCommerciale});
@@ -16,6 +17,13 @@ class _TerritorioCommState extends State<TerritorioComm> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: widget.territorioCommerciale.dataUscita != 'Data Uscita' &&
+              widget.territorioCommerciale.dataLimite != 'Data Limite'
+          ? MyDateParser.cardColorFromDate(
+              MyDateParser.dateInverter(
+                  widget.territorioCommerciale.dataLimite!),
+            )
+          : null,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
       margin: const EdgeInsets.all(8),

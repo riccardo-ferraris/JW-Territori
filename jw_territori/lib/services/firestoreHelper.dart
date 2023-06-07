@@ -229,11 +229,11 @@ class FirestoreHelper {
       String dataAttuale, int? numero, String fratello) async {
     final String dataRientroFormat;
     DateTime now = DateTime.now();
-    if (now.month + 4 > 12) {
-      dataRientroFormat = '${now.day}/${now.month - 8}/${now.year + 1}';
-    } else {
-      dataRientroFormat = '${now.day}/${now.month + 4}/${now.year}';
-    }
+
+    DateTime dataRientro;
+    dataRientro = now.add(const Duration(days: 120));
+    dataRientroFormat =
+        '${dataRientro.day}/${dataRientro.month}/${dataRientro.year}';
 
     final docRef = territoriCollection.doc(numero.toString());
     final elencoAssegnazioneCollection =
@@ -303,11 +303,11 @@ class FirestoreHelper {
       String dataAttuale, String? lettera, String fratello) async {
     final String dataRientroFormat;
     DateTime now = DateTime.now();
-    if (now.month + 4 > 12) {
-      dataRientroFormat = '${now.day}/${now.month - 8}/${now.year + 1}';
-    } else {
-      dataRientroFormat = '${now.day}/${now.month + 4}/${now.year}';
-    }
+
+    DateTime dataRientro;
+    dataRientro = now.add(const Duration(days: 120));
+    dataRientroFormat =
+        '${dataRientro.day}/${dataRientro.month}/${dataRientro.year}';
 
     final docRef = territoriCollection.doc(lettera);
     final elencoAssegnazioneCollection =

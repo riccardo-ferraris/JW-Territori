@@ -5,6 +5,8 @@ import 'package:jw_territori/models/territorioNormaleModel.dart';
 import 'package:jw_territori/pages/territoriNormali.dart';
 import 'package:jw_territori/services/firestoreHelper.dart';
 
+import '../services/date_parser.dart';
+
 class DettagliTerritorioNormale extends StatefulWidget {
   DettagliTerritorioNormale({super.key, required this.territorioNormale});
 
@@ -180,7 +182,9 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                   ),
                                 ],
                               ),
-                            )
+                            ),
+                      Text(MyDateParser.dateInverter(
+                          widget.territorioNormale.dataUscita!)),
                     ],
                   ),
                 ),

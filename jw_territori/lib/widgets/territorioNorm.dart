@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jw_territori/models/territorioNormaleModel.dart';
-
 import '../pages/dettagliTerritorioNormale.dart';
+import '../services/date_parser.dart';
 
 class TerritorioNorm extends StatefulWidget {
   TerritorioNorm({super.key, required this.territorioNormale});
@@ -16,6 +16,12 @@ class _TerritorioNormState extends State<TerritorioNorm> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: widget.territorioNormale.dataUscita != 'Data Uscita' &&
+              widget.territorioNormale.dataLimite != 'Data Limite'
+          ? MyDateParser.cardColorFromDate(
+              MyDateParser.dateInverter(widget.territorioNormale.dataLimite!),
+            )
+          : null,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
       margin: const EdgeInsets.all(8),
