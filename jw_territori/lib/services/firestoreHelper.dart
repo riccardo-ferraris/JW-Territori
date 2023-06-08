@@ -369,4 +369,14 @@ class FirestoreHelper {
             .map((e) => CardRegistroCommercialeModel.fromSnapshot(e))
             .toList());
   }
+
+  //! DELETE VOCE REGISTRO NORMALI
+  static Future deleteElementoRegistro(
+      String idElemento, String numeroTerritorio) async {
+    await elencoAssegnazione
+        .doc(numeroTerritorio)
+        .collection('Elenco')
+        .doc(idElemento)
+        .delete();
+  }
 }

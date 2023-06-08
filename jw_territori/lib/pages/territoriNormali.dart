@@ -12,6 +12,8 @@ class TerritoriNormali extends StatefulWidget {
 }
 
 class _TerritoriNormaliState extends State<TerritoriNormali> {
+  bool isOrderedByDate = false;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -38,7 +40,13 @@ class _TerritoriNormaliState extends State<TerritoriNormali> {
             ],
           ),
           actions: [
-            // ? IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
+            // IconButton(
+            //     onPressed: () {
+            //       setState(() {
+            //         isOrderedByDate = !isOrderedByDate;
+            //       });
+            //     },
+            //     icon: const Icon(Icons.list)),
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {

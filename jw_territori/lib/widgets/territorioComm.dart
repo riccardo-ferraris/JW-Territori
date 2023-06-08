@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/territorioCommercialeModel.dart';
 import '../pages/dettagliTerritorioCommerciale.dart';
 import '../services/date_parser.dart';
@@ -45,30 +44,47 @@ class _TerritorioCommState extends State<TerritorioComm> {
                 const SizedBox(
                   width: 40,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${widget.territorioCommerciale.fratelloInPossesso}',
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '${widget.territorioCommerciale.dataUscita}',
-                        ),
-                        const SizedBox(
-                          width: 80,
-                        ),
-                        Text('${widget.territorioCommerciale.dataLimite}'),
-                      ],
-                    ),
-                  ],
-                ),
+                widget.territorioCommerciale.isDisponibile == false
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${widget.territorioCommerciale.fratelloInPossesso}',
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '${widget.territorioCommerciale.dataUscita}',
+                              ),
+                              const SizedBox(
+                                width: 80,
+                              ),
+                              Text(
+                                  '${widget.territorioCommerciale.dataLimite}'),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Disponibile',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                              'Ultimo rientro: ${widget.territorioCommerciale.dataRientro}'),
+                        ],
+                      ),
               ],
             ),
             GestureDetector(

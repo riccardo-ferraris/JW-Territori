@@ -43,30 +43,46 @@ class _TerritorioNormState extends State<TerritorioNorm> {
                 const SizedBox(
                   width: 40,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${widget.territorioNormale.fratelloInPossesso}',
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '${widget.territorioNormale.dataUscita}',
-                        ),
-                        const SizedBox(
-                          width: 80,
-                        ),
-                        Text('${widget.territorioNormale.dataLimite}'),
-                      ],
-                    ),
-                  ],
-                ),
+                widget.territorioNormale.isDisponibile == false
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${widget.territorioNormale.fratelloInPossesso}',
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '${widget.territorioNormale.dataUscita}',
+                              ),
+                              const SizedBox(
+                                width: 80,
+                              ),
+                              Text('${widget.territorioNormale.dataLimite}'),
+                            ],
+                          ),
+                        ],
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Disponibile',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                              'Ultimo rientro: ${widget.territorioNormale.dataRientro}'),
+                        ],
+                      ),
               ],
             ),
             GestureDetector(

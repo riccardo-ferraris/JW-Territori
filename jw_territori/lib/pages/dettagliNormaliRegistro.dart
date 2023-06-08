@@ -55,7 +55,9 @@ class _DettagliNormaliRegistroState extends State<DettagliNormaliRegistro> {
                     itemBuilder: (context, index) {
                       final singleCardElenco = registroCard[index];
                       return ElencoRegistroNormaleCard(
-                          cardRegistroNormale: singleCardElenco);
+                        cardRegistroNormale: singleCardElenco,
+                        index: widget.index,
+                      );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
