@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jw_territori/pages/calculate_average.dart';
 import 'package:jw_territori/pages/elencoNormaliRegistro.dart';
 import 'package:jw_territori/services/firestoreHelper.dart';
 
@@ -36,6 +37,16 @@ class _RegistroState extends State<Registro> {
             ],
           ),
           actions: [
+            IconButton(
+                onPressed: () {
+                  // FirestoreHelper.counterTerritoriPerMedia();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const CalculateAverage(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.calculate)),
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () {

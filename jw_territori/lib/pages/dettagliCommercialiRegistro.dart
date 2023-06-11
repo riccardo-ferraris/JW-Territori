@@ -58,7 +58,9 @@ class _DettagliCommercialiRegistroState
                     itemBuilder: (context, index) {
                       final singleCardElenco = registroCard[index];
                       return ElencoRegistroCommercialeCard(
-                          cardRegistroCommerciale: singleCardElenco);
+                        cardRegistroCommerciale: singleCardElenco,
+                        lettera: widget.territorioCommerciale.lettera!,
+                      );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),

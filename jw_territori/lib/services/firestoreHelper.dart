@@ -379,4 +379,36 @@ class FirestoreHelper {
         .doc(idElemento)
         .delete();
   }
+
+  // static int counterTerritoriPerMedia() {
+  //   int cont = 0;
+  //   for (int i = 1; i <= 72; i++) {
+  //     elencoAssegnazione
+  //         .doc(i.toString())
+  //         .collection('Elenco')
+  //         .where('dataRientro', isNotEqualTo: '')
+  //         .get()
+  //         .then((QuerySnapshot querySnapshot) {
+  //       for (var doc in querySnapshot.docs) {
+  //         print(doc.data().toString());
+  //       }
+  //     });
+  //   }
+  //   return cont;
+  // }
+
+  // static Stream<List<CardRegistroNormaleModel>>? readElementiRegistroDaMedia() {
+  //   for (int i = 1; i < 73; i++) {
+  //     final elencoAssegnazioneDaMedia = elencoAssegnazione
+  //         .doc(i.toString())
+  //         .collection('Elenco')
+  //         .where('dataRientro', isNotEqualTo: '');
+  //     return elencoAssegnazioneDaMedia.snapshots().map((querySnapshot) =>
+  //         querySnapshot.docs
+  //             .map((e) => CardRegistroNormaleModel.fromSnapshot(e))
+  //             .toList());
+  //   }
+
+  //   return null;
+  // }
 }
