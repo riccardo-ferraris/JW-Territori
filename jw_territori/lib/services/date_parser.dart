@@ -21,10 +21,15 @@ class MyDateParser {
 
   static Color? cardColorFromDate(DateTime dataLimite) {
     DateTime now = DateTime.now();
-    if (dataLimite.difference(now) < const Duration(days: 60) &&
-        dataLimite.difference(now) > const Duration(days: 0)) {
+    if (
+        // dataLimite.difference(now) < const Duration(days: 60) &&
+        // dataLimite.difference(now) > const Duration(days: 0))
+        now.difference(dataLimite) > const Duration(days: 0) &&
+            now.difference(dataLimite) <= const Duration(days: 10)) {
       return Colors.yellow;
-    } else if (dataLimite.difference(now).isNegative) {
+    } else if (
+        //dataLimite.difference(now).isNegative
+        now.difference(dataLimite) > const Duration(days: 10)) {
       return Colors.red[600];
     } else {
       return Colors.white;
