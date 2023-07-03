@@ -1,8 +1,8 @@
 // ignore: file_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jw_territori/services/firestoreHelper.dart';
-import 'package:jw_territori/widgets/territorioComm.dart';
+import 'package:jw_territori/services/firestore_helper.dart';
+import 'package:jw_territori/widgets/territorio_comm.dart';
 
 class TerritoriCommerciali extends StatefulWidget {
   const TerritoriCommerciali({super.key});

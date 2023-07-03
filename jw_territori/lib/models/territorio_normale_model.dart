@@ -1,41 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TerritorioCommercialeModel {
+class TerritorioNormaleModel {
   final String? fratelloInPossesso;
   final String? dataLimite;
   final String? dataRientro;
   final String? dataUscita;
   final bool? isDisponibile;
   final bool? isNormale;
-  final String? lettera;
+  final int? numero;
   final String? id;
-  final timestamp;
+  final dynamic timestamp;
 
-  TerritorioCommercialeModel(
+  TerritorioNormaleModel(
       {this.dataUscita,
       this.isDisponibile,
       this.isNormale,
-      this.lettera,
+      this.numero,
       this.fratelloInPossesso,
       this.dataLimite,
       this.dataRientro,
       this.id,
       this.timestamp});
 
-  factory TerritorioCommercialeModel.fromSnapshot(DocumentSnapshot snap) {
+  factory TerritorioNormaleModel.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
-    return TerritorioCommercialeModel(
-      fratelloInPossesso: snapshot['fratelloInPossesso'],
-      dataLimite: snapshot['dataLimite'],
-      dataRientro: snapshot['dataRientro'],
-      dataUscita: snapshot['dataUscita'],
-      isDisponibile: snapshot['isDisponibile'],
-      isNormale: snapshot['isNormale'],
-      lettera: snapshot['lettera'],
-      id: snapshot['id'],
-      timestamp: snapshot['timestamp'],
-    );
+    return TerritorioNormaleModel(
+        fratelloInPossesso: snapshot['fratelloInPossesso'],
+        dataLimite: snapshot['dataLimite'],
+        dataRientro: snapshot['dataRientro'],
+        dataUscita: snapshot['dataUscita'],
+        isDisponibile: snapshot['isDisponibile'],
+        isNormale: snapshot['isNormale'],
+        numero: snapshot['numero'],
+        id: snapshot['id'],
+        timestamp: snapshot['timestamp']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -45,8 +44,8 @@ class TerritorioCommercialeModel {
         'dataUscita': dataUscita,
         'isDisponibile': isDisponibile,
         'isNormale': isNormale,
-        'lettera': lettera,
+        'numero': numero,
         'id': id,
-        'timestamp': timestamp
+        'timestamp': timestamp,
       };
 }

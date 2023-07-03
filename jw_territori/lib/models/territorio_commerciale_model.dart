@@ -1,40 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TerritorioNormaleModel {
+class TerritorioCommercialeModel {
   final String? fratelloInPossesso;
   final String? dataLimite;
   final String? dataRientro;
   final String? dataUscita;
   final bool? isDisponibile;
   final bool? isNormale;
-  final int? numero;
+  final String? lettera;
   final String? id;
-  final timestamp;
+  final dynamic timestamp;
 
-  TerritorioNormaleModel(
+  TerritorioCommercialeModel(
       {this.dataUscita,
       this.isDisponibile,
       this.isNormale,
-      this.numero,
+      this.lettera,
       this.fratelloInPossesso,
       this.dataLimite,
       this.dataRientro,
       this.id,
       this.timestamp});
 
-  factory TerritorioNormaleModel.fromSnapshot(DocumentSnapshot snap) {
+  factory TerritorioCommercialeModel.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 
-    return TerritorioNormaleModel(
-        fratelloInPossesso: snapshot['fratelloInPossesso'],
-        dataLimite: snapshot['dataLimite'],
-        dataRientro: snapshot['dataRientro'],
-        dataUscita: snapshot['dataUscita'],
-        isDisponibile: snapshot['isDisponibile'],
-        isNormale: snapshot['isNormale'],
-        numero: snapshot['numero'],
-        id: snapshot['id'],
-        timestamp: snapshot['timestamp']);
+    return TerritorioCommercialeModel(
+      fratelloInPossesso: snapshot['fratelloInPossesso'],
+      dataLimite: snapshot['dataLimite'],
+      dataRientro: snapshot['dataRientro'],
+      dataUscita: snapshot['dataUscita'],
+      isDisponibile: snapshot['isDisponibile'],
+      isNormale: snapshot['isNormale'],
+      lettera: snapshot['lettera'],
+      id: snapshot['id'],
+      timestamp: snapshot['timestamp'],
+    );
   }
 
   Map<String, dynamic> toJson() => {
@@ -44,8 +45,8 @@ class TerritorioNormaleModel {
         'dataUscita': dataUscita,
         'isDisponibile': isDisponibile,
         'isNormale': isNormale,
-        'numero': numero,
+        'lettera': lettera,
         'id': id,
-        'timestamp': timestamp,
+        'timestamp': timestamp
       };
 }

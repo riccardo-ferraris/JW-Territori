@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jw_territori/pages/registro.dart';
-import 'package:jw_territori/pages/territoriCommerciali.dart';
-import 'package:jw_territori/pages/territoriNormali.dart';
-import 'package:jw_territori/services/firestoreHelper.dart';
+import 'package:jw_territori/pages/territori_commerciali.dart';
+import 'package:jw_territori/pages/territori_normali.dart';
+import 'package:jw_territori/services/firestore_helper.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

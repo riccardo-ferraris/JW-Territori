@@ -1,70 +1,69 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:jw_territori/models/cardRegistroCommercialeModel.dart';
+import 'package:jw_territori/models/card_registro_normale_model.dart';
+import 'package:jw_territori/services/firestore_helper.dart';
 
-import '../services/firestoreHelper.dart';
+class ElencoRegistroNormaleCard extends StatefulWidget {
+  ElencoRegistroNormaleCard(
+      {super.key, required this.cardRegistroNormale, required this.index});
 
-class ElencoRegistroCommercialeCard extends StatefulWidget {
-  ElencoRegistroCommercialeCard({
-    super.key,
-    required this.cardRegistroCommerciale,
-    required this.lettera,
-  });
-
-  CardRegistroCommercialeModel cardRegistroCommerciale;
-  String lettera;
-
+  CardRegistroNormaleModel cardRegistroNormale;
+  int index;
   @override
-  State<ElencoRegistroCommercialeCard> createState() =>
-      _ElencoRegistroCommercialeCardState();
+  State<ElencoRegistroNormaleCard> createState() =>
+      _ElencoRegistroNormaleCardState();
 }
 
-class _ElencoRegistroCommercialeCardState
-    extends State<ElencoRegistroCommercialeCard> {
+class _ElencoRegistroNormaleCardState extends State<ElencoRegistroNormaleCard> {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      endActionPane: ActionPane(motion: const ScrollMotion(), children: [
-        SlidableAction(
-          onPressed: (context) {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Sei sicuro?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('No',
-                            style: TextStyle(
-                                color: Color(0xFF5A2D81),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20)),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          FirestoreHelper.deleteElementoRegistro(
-                              widget.cardRegistroCommerciale.id!,
-                              widget.lettera);
+      endActionPane: ActionPane(
+        motion: const ScrollMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (context) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Sei sicuro?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('No',
+                              style: TextStyle(
+                                  color: Color(0xFF5A2D81),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20)),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            FirestoreHelper.deleteElementoRegistro(
+                                widget.cardRegistroNormale.id!,
+                                widget.index.toString());
 
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Si',
-                            style: TextStyle(
-                                color: Color(0xFF5A2D81),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20)),
-                      ),
-                    ],
-                  );
-                });
-          },
-          icon: Icons.delete,
-          backgroundColor: Colors.red,
-        )
-      ]),
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Si',
+                              style: TextStyle(
+                                  color: Color(0xFF5A2D81),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20)),
+                        ),
+                      ],
+                    );
+                  });
+            },
+            icon: Icons.delete,
+            backgroundColor: Colors.red,
+          )
+        ],
+      ),
       child: Column(
         children: [
           Container(
@@ -81,7 +80,7 @@ class _ElencoRegistroCommercialeCardState
                     )),
                 Center(
                     child: Text(
-                  '${widget.cardRegistroCommerciale.fratelloInPossesso}',
+                  '${widget.cardRegistroNormale.fratelloInPossesso}',
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 )),
@@ -104,7 +103,7 @@ class _ElencoRegistroCommercialeCardState
                           )),
                       Center(
                           child: Text(
-                        '${widget.cardRegistroCommerciale.dataUscita}',
+                        '${widget.cardRegistroNormale.dataUscita}',
                         style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold),
                       )),
@@ -126,7 +125,7 @@ class _ElencoRegistroCommercialeCardState
                           )),
                       Center(
                           child: Text(
-                        '${widget.cardRegistroCommerciale.dataRientro}',
+                        '${widget.cardRegistroNormale.dataRientro}',
                         style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold),
                       )),

@@ -1,12 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:jw_territori/models/cardRegistroNormaleModel.dart';
-import 'package:jw_territori/models/territorioNormaleModel.dart';
+import 'package:jw_territori/models/card_registro_normale_model.dart';
+import 'package:jw_territori/models/territorio_normale_model.dart';
 
-import '../models/cardRegistroCommercialeModel.dart';
-import '../models/territorioCommercialeModel.dart';
+import '../models/card_registro_commerciale_model.dart';
+import '../models/territorio_commerciale_model.dart';
 
 final territoriCollection =
     FirebaseFirestore.instance.collection('"Territori"');
@@ -379,36 +381,4 @@ class FirestoreHelper {
         .doc(idElemento)
         .delete();
   }
-
-  // static int counterTerritoriPerMedia() {
-  //   int cont = 0;
-  //   for (int i = 1; i <= 72; i++) {
-  //     elencoAssegnazione
-  //         .doc(i.toString())
-  //         .collection('Elenco')
-  //         .where('dataRientro', isNotEqualTo: '')
-  //         .get()
-  //         .then((QuerySnapshot querySnapshot) {
-  //       for (var doc in querySnapshot.docs) {
-  //         print(doc.data().toString());
-  //       }
-  //     });
-  //   }
-  //   return cont;
-  // }
-
-  // static Stream<List<CardRegistroNormaleModel>>? readElementiRegistroDaMedia() {
-  //   for (int i = 1; i < 73; i++) {
-  //     final elencoAssegnazioneDaMedia = elencoAssegnazione
-  //         .doc(i.toString())
-  //         .collection('Elenco')
-  //         .where('dataRientro', isNotEqualTo: '');
-  //     return elencoAssegnazioneDaMedia.snapshots().map((querySnapshot) =>
-  //         querySnapshot.docs
-  //             .map((e) => CardRegistroNormaleModel.fromSnapshot(e))
-  //             .toList());
-  //   }
-
-  //   return null;
-  // }
 }

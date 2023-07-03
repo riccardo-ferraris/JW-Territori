@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jw_territori/pages/calculate_average.dart';
-import 'package:jw_territori/pages/elencoNormaliRegistro.dart';
-import 'package:jw_territori/services/firestoreHelper.dart';
+import 'package:jw_territori/pages/elenco_normali_registro.dart';
+import 'package:jw_territori/services/firestore_helper.dart';
 
-import 'elencoCommercialiRegistro.dart';
+import 'elenco_commerciali_registro.dart';
 
 class Registro extends StatefulWidget {
   const Registro({super.key});

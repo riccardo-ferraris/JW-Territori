@@ -2,7 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:jw_territori/services/firestoreHelper.dart';
+import 'package:jw_territori/services/firestore_helper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

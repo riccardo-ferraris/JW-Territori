@@ -1,11 +1,11 @@
 // ignore: file_names
+// ignore_for_file: must_be_immutable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jw_territori/models/territorioNormaleModel.dart';
-import 'package:jw_territori/pages/territoriNormali.dart';
-import 'package:jw_territori/services/firestoreHelper.dart';
-
-import '../services/date_parser.dart';
+import 'package:jw_territori/models/territorio_normale_model.dart';
+import 'package:jw_territori/pages/territori_normali.dart';
+import 'package:jw_territori/services/firestore_helper.dart';
 
 class DettagliTerritorioNormale extends StatefulWidget {
   DettagliTerritorioNormale({super.key, required this.territorioNormale});
@@ -296,54 +296,67 @@ class _DettagliTerritorioNormaleState extends State<DettagliTerritorioNormale> {
                                   const EdgeInsets.all(20)),
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: const Text('Sei sicuro?'),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text('No',
-                                                style: TextStyle(
-                                                    color: Color(0xFF5A2D81),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                        TextButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                isAssigned = !isAssigned;
+                              if (controllerFratello.text != '') {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text('Sei sicuro?'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text('No',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF5A2D81),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20))),
+                                          TextButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  isAssigned = !isAssigned;
 
-                                                DateTime now = DateTime.now();
-                                                String dataString =
-                                                    '${now.day}/${now.month}/${now.year}';
+                                                  DateTime now = DateTime.now();
+                                                  String dataString =
+                                                      '${now.day}/${now.month}/${now.year}';
 
-                                                FirestoreHelper
-                                                    .updateAffidaNormali(
-                                                        dataString,
-                                                        widget.territorioNormale
-                                                            .numero,
-                                                        controllerFratello
-                                                            .text);
-                                              });
-                                              Navigator.pushNamedAndRemoveUntil(
-                                                  context, '/', (_) => false);
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const TerritoriNormali()));
-                                            },
-                                            child: const Text('Si',
-                                                style: TextStyle(
-                                                    color: Color(0xFF5A2D81),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                      ],
-                                    );
-                                  });
+                                                  FirestoreHelper
+                                                      .updateAffidaNormali(
+                                                          dataString,
+                                                          widget
+                                                              .territorioNormale
+                                                              .numero,
+                                                          controllerFratello
+                                                              .text);
+                                                });
+                                                Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                        context,
+                                                        '/',
+                                                        (_) => false);
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const TerritoriNormali()));
+                                              },
+                                              child: const Text('Si',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF5A2D81),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20))),
+                                        ],
+                                      );
+                                    });
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Inserisci il nome di un proclamatore.')));
+                              }
                             },
                             child: const Text(
                               'Assegna',

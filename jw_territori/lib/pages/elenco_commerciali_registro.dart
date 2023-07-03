@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:jw_territori/models/territorioCommercialeModel.dart';
+// ignore_for_file: must_be_immutable
 
-import 'dettagliCommercialiRegistro.dart';
+import 'package:flutter/material.dart';
+import 'package:jw_territori/models/territorio_commerciale_model.dart';
+
+import 'dettagli_commerciali_registro.dart';
 
 class ElencoCommercialiRegistro extends StatefulWidget {
   ElencoCommercialiRegistro(

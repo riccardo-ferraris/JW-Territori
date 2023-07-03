@@ -1,9 +1,11 @@
 // ignore: file_names
+// ignore_for_file: must_be_immutable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jw_territori/models/territorioCommercialeModel.dart';
-import 'package:jw_territori/pages/territoriCommerciali.dart';
-import 'package:jw_territori/services/firestoreHelper.dart';
+import 'package:jw_territori/models/territorio_commerciale_model.dart';
+import 'package:jw_territori/pages/territori_commerciali.dart';
+import 'package:jw_territori/services/firestore_helper.dart';
 
 class DettagliTerritorioCommerciale extends StatefulWidget {
   DettagliTerritorioCommerciale(
@@ -209,32 +211,34 @@ class _DettagliTerritorioCommercialeState
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        setState(() {
-                                          isAssigned = !isAssigned;
+                                        setState(
+                                          () {
+                                            isAssigned = !isAssigned;
 
-                                          DateTime now = DateTime.now();
-                                          String dataString =
-                                              '${now.day}/${now.month}/${now.year}';
-                                          FirestoreHelper
-                                              .updateRiconsegnaCommerciali(
-                                                  dataString,
-                                                  widget.territorioCommerciale
-                                                      .lettera,
-                                                  widget.territorioCommerciale
-                                                      .fratelloInPossesso,
-                                                  widget.territorioCommerciale
-                                                      .dataUscita,
-                                                  widget.territorioCommerciale
-                                                      .id);
+                                            DateTime now = DateTime.now();
+                                            String dataString =
+                                                '${now.day}/${now.month}/${now.year}';
+                                            FirestoreHelper
+                                                .updateRiconsegnaCommerciali(
+                                                    dataString,
+                                                    widget.territorioCommerciale
+                                                        .lettera,
+                                                    widget.territorioCommerciale
+                                                        .fratelloInPossesso,
+                                                    widget.territorioCommerciale
+                                                        .dataUscita,
+                                                    widget.territorioCommerciale
+                                                        .id);
 
-                                          Navigator.pushNamedAndRemoveUntil(
-                                              context, '/', (_) => false);
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const TerritoriCommerciali()));
-                                        });
+                                            Navigator.pushNamedAndRemoveUntil(
+                                                context, '/', (_) => false);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const TerritoriCommerciali()));
+                                          },
+                                        );
                                       },
                                       child: const Text('Si',
                                           style: TextStyle(
@@ -288,54 +292,66 @@ class _DettagliTerritorioCommercialeState
                                   const EdgeInsets.all(20)),
                             ),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: const Text('Sei sicuro?'),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text('No',
-                                                style: TextStyle(
-                                                    color: Color(0xFF5A2D81),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                        TextButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                isAssigned = !isAssigned;
+                              if (controllerFratello.text != '') {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: const Text('Sei sicuro?'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text('No',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF5A2D81),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20))),
+                                          TextButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  isAssigned = !isAssigned;
 
-                                                DateTime now = DateTime.now();
-                                                String dataString =
-                                                    '${now.day}/${now.month}/${now.year}';
-                                                FirestoreHelper
-                                                    .updateAffidaCommerciali(
-                                                        dataString,
-                                                        widget
-                                                            .territorioCommerciale
-                                                            .lettera,
-                                                        controllerFratello
-                                                            .text);
-                                              });
-                                              Navigator.pushNamedAndRemoveUntil(
-                                                  context, '/', (_) => false);
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const TerritoriCommerciali()));
-                                            },
-                                            child: const Text('Si',
-                                                style: TextStyle(
-                                                    color: Color(0xFF5A2D81),
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                      ],
-                                    );
-                                  });
+                                                  DateTime now = DateTime.now();
+                                                  String dataString =
+                                                      '${now.day}/${now.month}/${now.year}';
+                                                  FirestoreHelper
+                                                      .updateAffidaCommerciali(
+                                                          dataString,
+                                                          widget
+                                                              .territorioCommerciale
+                                                              .lettera,
+                                                          controllerFratello
+                                                              .text);
+                                                });
+                                                Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                        context,
+                                                        '/',
+                                                        (_) => false);
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const TerritoriCommerciali()));
+                                              },
+                                              child: const Text('Si',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF5A2D81),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20))),
+                                        ],
+                                      );
+                                    });
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Inserisci il nome di un proclamatore.')));
+                              }
                             },
                             child: const Text(
                               'Assegna',

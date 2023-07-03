@@ -1,67 +1,72 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:jw_territori/models/cardRegistroNormaleModel.dart';
-import 'package:jw_territori/services/firestoreHelper.dart';
+import 'package:jw_territori/models/card_registro_commerciale_model.dart';
 
-class ElencoRegistroNormaleCard extends StatefulWidget {
-  ElencoRegistroNormaleCard(
-      {super.key, required this.cardRegistroNormale, required this.index});
+import '../services/firestore_helper.dart';
 
-  CardRegistroNormaleModel cardRegistroNormale;
-  int index;
+class ElencoRegistroCommercialeCard extends StatefulWidget {
+  ElencoRegistroCommercialeCard({
+    super.key,
+    required this.cardRegistroCommerciale,
+    required this.lettera,
+  });
+
+  CardRegistroCommercialeModel cardRegistroCommerciale;
+  String lettera;
+
   @override
-  State<ElencoRegistroNormaleCard> createState() =>
-      _ElencoRegistroNormaleCardState();
+  State<ElencoRegistroCommercialeCard> createState() =>
+      _ElencoRegistroCommercialeCardState();
 }
 
-class _ElencoRegistroNormaleCardState extends State<ElencoRegistroNormaleCard> {
+class _ElencoRegistroCommercialeCardState
+    extends State<ElencoRegistroCommercialeCard> {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      endActionPane: ActionPane(
-        motion: const ScrollMotion(),
-        children: [
-          SlidableAction(
-            onPressed: (context) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text('Sei sicuro?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('No',
-                              style: TextStyle(
-                                  color: Color(0xFF5A2D81),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20)),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            FirestoreHelper.deleteElementoRegistro(
-                                widget.cardRegistroNormale.id!,
-                                widget.index.toString());
+      endActionPane: ActionPane(motion: const ScrollMotion(), children: [
+        SlidableAction(
+          onPressed: (context) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Sei sicuro?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('No',
+                            style: TextStyle(
+                                color: Color(0xFF5A2D81),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20)),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          FirestoreHelper.deleteElementoRegistro(
+                              widget.cardRegistroCommerciale.id!,
+                              widget.lettera);
 
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Si',
-                              style: TextStyle(
-                                  color: Color(0xFF5A2D81),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20)),
-                        ),
-                      ],
-                    );
-                  });
-            },
-            icon: Icons.delete,
-            backgroundColor: Colors.red,
-          )
-        ],
-      ),
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Si',
+                            style: TextStyle(
+                                color: Color(0xFF5A2D81),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20)),
+                      ),
+                    ],
+                  );
+                });
+          },
+          icon: Icons.delete,
+          backgroundColor: Colors.red,
+        )
+      ]),
       child: Column(
         children: [
           Container(
@@ -78,7 +83,7 @@ class _ElencoRegistroNormaleCardState extends State<ElencoRegistroNormaleCard> {
                     )),
                 Center(
                     child: Text(
-                  '${widget.cardRegistroNormale.fratelloInPossesso}',
+                  '${widget.cardRegistroCommerciale.fratelloInPossesso}',
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 )),
@@ -101,7 +106,7 @@ class _ElencoRegistroNormaleCardState extends State<ElencoRegistroNormaleCard> {
                           )),
                       Center(
                           child: Text(
-                        '${widget.cardRegistroNormale.dataUscita}',
+                        '${widget.cardRegistroCommerciale.dataUscita}',
                         style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold),
                       )),
@@ -123,7 +128,7 @@ class _ElencoRegistroNormaleCardState extends State<ElencoRegistroNormaleCard> {
                           )),
                       Center(
                           child: Text(
-                        '${widget.cardRegistroNormale.dataRientro}',
+                        '${widget.cardRegistroCommerciale.dataRientro}',
                         style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold),
                       )),

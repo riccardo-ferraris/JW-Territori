@@ -1,26 +1,27 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import '../models/territorioCommercialeModel.dart';
-import '../pages/dettagliTerritorioCommerciale.dart';
+import 'package:jw_territori/models/territorio_normale_model.dart';
+import '../pages/dettagli_territorio_normale.dart';
 import '../services/date_parser.dart';
 
-class TerritorioComm extends StatefulWidget {
-  TerritorioComm({super.key, required this.territorioCommerciale});
+class TerritorioNorm extends StatefulWidget {
+  TerritorioNorm({super.key, required this.territorioNormale});
 
-  TerritorioCommercialeModel territorioCommerciale;
+  TerritorioNormaleModel territorioNormale;
 
   @override
-  State<TerritorioComm> createState() => _TerritorioCommState();
+  State<TerritorioNorm> createState() => _TerritorioNormState();
 }
 
-class _TerritorioCommState extends State<TerritorioComm> {
+class _TerritorioNormState extends State<TerritorioNorm> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: widget.territorioCommerciale.dataUscita != 'Data Uscita' &&
-              widget.territorioCommerciale.dataLimite != 'Data Limite'
+      color: widget.territorioNormale.dataUscita != 'Data Uscita' &&
+              widget.territorioNormale.dataLimite != 'Data Limite'
           ? MyDateParser.cardColorFromDate(
-              MyDateParser.dateInverter(
-                  widget.territorioCommerciale.dataLimite!),
+              MyDateParser.dateInverter(widget.territorioNormale.dataLimite!),
             )
           : null,
       shape: const RoundedRectangleBorder(
@@ -35,7 +36,7 @@ class _TerritorioCommState extends State<TerritorioComm> {
             Row(
               children: [
                 Text(
-                  '${widget.territorioCommerciale.lettera}',
+                  '${widget.territorioNormale.numero}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -44,12 +45,12 @@ class _TerritorioCommState extends State<TerritorioComm> {
                 const SizedBox(
                   width: 40,
                 ),
-                widget.territorioCommerciale.isDisponibile == false
+                widget.territorioNormale.isDisponibile == false
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${widget.territorioCommerciale.fratelloInPossesso}',
+                            '${widget.territorioNormale.fratelloInPossesso}',
                             style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -59,13 +60,12 @@ class _TerritorioCommState extends State<TerritorioComm> {
                           Row(
                             children: [
                               Text(
-                                '${widget.territorioCommerciale.dataUscita}',
+                                '${widget.territorioNormale.dataUscita}',
                               ),
                               const SizedBox(
                                 width: 80,
                               ),
-                              Text(
-                                  '${widget.territorioCommerciale.dataLimite}'),
+                              Text('${widget.territorioNormale.dataLimite}'),
                             ],
                           ),
                         ],
@@ -82,7 +82,7 @@ class _TerritorioCommState extends State<TerritorioComm> {
                             height: 15,
                           ),
                           Text(
-                              'Ultimo rientro: ${widget.territorioCommerciale.dataRientro}'),
+                              'Ultimo rientro: ${widget.territorioNormale.dataRientro}'),
                         ],
                       ),
               ],
@@ -93,9 +93,8 @@ class _TerritorioCommState extends State<TerritorioComm> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DettagliTerritorioCommerciale(
-                              territorioCommerciale:
-                                  widget.territorioCommerciale,
+                        builder: (context) => DettagliTerritorioNormale(
+                              territorioNormale: widget.territorioNormale,
                             )));
               },
             ),

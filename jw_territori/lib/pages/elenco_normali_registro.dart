@@ -1,6 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:jw_territori/models/territorioNormaleModel.dart';
-import 'package:jw_territori/pages/dettagliNormaliRegistro.dart';
+import 'package:jw_territori/models/territorio_normale_model.dart';
+import 'package:jw_territori/pages/dettagli_normali_registro.dart';
 
 class ElencoNormaliRegistro extends StatefulWidget {
   ElencoNormaliRegistro(
