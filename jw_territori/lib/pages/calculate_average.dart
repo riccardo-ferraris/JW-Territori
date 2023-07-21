@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class CalculateAverage extends StatelessWidget {
   const CalculateAverage({super.key});
@@ -78,7 +79,17 @@ class CalculateAverage extends StatelessWidget {
         future: calculateAverage(),
         builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset('images/math_animation.json'),
+                const Text(
+                  'Calcolo...',
+                  style: TextStyle(fontSize: 25),
+                ),
+              ],
+            ));
           } else if (snapshot.hasError) {
             return const Center(
                 child: Text(
