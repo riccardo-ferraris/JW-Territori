@@ -66,6 +66,7 @@ class CalculateAverage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Calcolo Media'),
         backgroundColor: const Color(0xFF5A2D81),
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

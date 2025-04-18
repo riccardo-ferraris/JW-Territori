@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xFF5A2D81),
+            foregroundColor: Colors.white,
             automaticallyImplyLeading: false,
             title: Text('Ciao $userName'),
             actions: [

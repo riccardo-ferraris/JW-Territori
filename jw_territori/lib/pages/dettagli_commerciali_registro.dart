@@ -27,6 +27,7 @@ class _DettagliCommercialiRegistroState
         title:
             Text('Registro territorio ${widget.territorioCommerciale.lettera}'),
         backgroundColor: const Color(0xFF5A2D81),
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

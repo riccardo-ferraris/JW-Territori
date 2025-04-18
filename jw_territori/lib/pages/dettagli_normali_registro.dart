@@ -23,6 +23,7 @@ class _DettagliNormaliRegistroState extends State<DettagliNormaliRegistro> {
       appBar: AppBar(
         title: Text('Registro territorio ${widget.index}'),
         backgroundColor: const Color(0xFF5A2D81),
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

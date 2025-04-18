@@ -22,12 +22,15 @@ class _RegistroState extends State<Registro> {
         appBar: AppBar(
           title: const Text('Registro'),
           backgroundColor: const Color(0xFF5A2D81),
-          bottom: const TabBar(
+          foregroundColor: Colors.white,
+          bottom: TabBar(
             labelColor: Colors.white,
             indicatorColor: Colors.white,
-            labelStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            labelStyle:
+                const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             indicatorWeight: 3,
-            tabs: [
+            unselectedLabelColor: Colors.grey[500],
+            tabs: const [
               Tab(
                 text: 'Residenziali',
               ),
